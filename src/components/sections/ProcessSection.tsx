@@ -1,32 +1,32 @@
-import SectionHeading from '@/components/SectionHeading';
-import Reveal from '@/components/Reveal';
+import SectionHeading from "@/components/SectionHeading";
+import Reveal from "@/components/Reveal";
 
 const phases = [
   {
-    stage: '01 — Discover',
-    title: 'Align on the next best move.',
-    copy: 'Placeholder text: audit what exists, ask clarifying questions, and map technical constraints to product ambitions.',
+    stage: "01 — Discover",
+    title: "Align on the next best move.",
+    copy: "I start by understanding the full picture—auditing existing systems, asking the right questions, and clarifying constraints. This phase aligns product vision with technical reality, ensuring every next step is deliberate and strategic.",
   },
   {
-    stage: '02 — Design',
-    title: 'Prototype, validate, and architect.',
-    copy: 'Placeholder text: pair with design, outline systems, choose the right tools, and chart a delivery plan teams can trust.',
+    stage: "02 — Design",
+    title: "Prototype, validate, and architect.",
+    copy: "Collaborating closely with design and product, I translate ideas into tangible solutions. I choose the right tools, prototype early to de-risk assumptions, and design systems that are scalable, maintainable, and developer-friendly—whether it’s front-end architecture, API contracts, or AI agent flows.",
   },
   {
-    stage: '03 — Deliver',
-    title: 'Ship with confidence, iterate with data.',
-    copy: 'Placeholder text: implement with care, automate quality, track impact, and prepare the next iteration loop.',
+    stage: "03 — Deliver",
+    title: "Ship with confidence, iterate with data.",
+    copy: "I build with care and precision, automating quality checks through CI/CD pipelines and observability layers. Once shipped, I track performance, gather real-world data, and use it to inform the next iteration—ensuring products continuously evolve with clarity and speed.",
   },
 ];
 
 export default function ProcessSection() {
   return (
-    <section id="process" className="relative px-6 py-24 sm:py-32">
-      <div className="mx-auto flex w-full max-w-screen-2xl flex-col gap-14">
+    <section id="process" className="relative px-6 py-16 sm:py-20">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <SectionHeading
           eyebrow="Process"
           title="A repeatable cadence for shipping meaningful work."
-          description="Customize these phases to reflect how you navigate ambiguity, lead teams, and deliver measured impact."
+          description="This is how I navigate ambiguity, align teams, and deliver high-quality products—from concept to production and beyond."
           align="center"
         />
 
@@ -37,8 +37,12 @@ export default function ProcessSection() {
                 <span className="text-xs font-semibold uppercase tracking-[0.4em] text-white/45 group-hover:text-white/60">
                   {phase.stage}
                 </span>
-                <h3 className="text-2xl font-semibold text-white">{phase.title}</h3>
-                <p className="text-sm text-white/70 group-hover:text-white/80">{phase.copy}</p>
+                <h3 className="text-2xl font-semibold text-white">
+                  {phase.title}
+                </h3>
+                <p className="text-sm text-white/70 group-hover:text-white/80">
+                  {phase.copy}
+                </p>
               </div>
             </Reveal>
           ))}

@@ -43,7 +43,7 @@ export default function RootLayout({
       >
         <DotGridBackground />
         <Navbar />
-        <div className="relative z-0 pt-24 sm:pt-28">{children}</div>
+        <div className="relative z-0 pt-20 sm:pt-24">{children}</div>
       </body>
     </html>
   );

@@ -1,48 +1,60 @@
-import SectionHeading from '@/components/SectionHeading';
-import Reveal from '@/components/Reveal';
+import SectionHeading from "@/components/SectionHeading";
+import Reveal from "@/components/Reveal";
 
 const testimonials = [
   {
+    icon: "💼",
+    person: "Lucas Novak — CTO",
+    role: "Engineering Leader & Startup Founder",
     quote:
-      '“Insert an enthusiastic recommendation about your leadership, collaboration, and ability to translate ideas into quality software.”',
-    person: 'Placeholder Product Leader',
-    role: 'Future Company',
+      "“I’ve had the pleasure of working with Atik as his engineering manager. Atik is hardworking, communicative, and I could always trust his work. I enjoyed working with him so much that I asked him to consult as a FE engineer for my startup.”",
+    attribution: "— Lucas Novak, CTO",
   },
   {
+    icon: "👨‍💻",
+    person: "Md Masud Rana — Full-Stack Developer",
+    role: "Engineering Partner",
     quote:
-      '“Describe how you de-risked launches, mentored teammates, or delivered delightful experiences across the stack.”',
-    person: 'Placeholder Engineering Manager',
-    role: 'Previous Org',
+      "“I had the opportunity to work alongside Atik, and he truly stands out as a talented engineer. He has a sharp eye for performance and detail, always striving to deliver clean, efficient solutions. Beyond his technical skills, he’s dependable, easy to work with, and brings a thoughtful approach to every project. Atik also has a positive, can-do attitude that makes working with him a great experience. He’s the kind of teammate you can count on in high-pressure situations and he always brings value to the team.”",
+    attribution: "— Md Masud Rana, Full-Stack Developer",
   },
   {
+    icon: "🌍",
+    person: "Freelance Client — CEO",
+    role: "Product Founder",
     quote:
-      '“Call out how you balance speed with quality, bring partners along the journey, and keep teams focused on outcomes.”',
-    person: 'Placeholder Design Partner',
-    role: 'Collaborator',
+      "“Atik delivered good work on this React.js development project and I enjoyed working with him. His communication and coding skills were excellent, he met all deadlines, and his skills were reasonably strong.”",
+    attribution: "— Client Feedback",
   },
 ];
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="relative px-6 py-24 sm:py-32">
-      <div className="mx-auto flex w-full max-w-screen-2xl flex-col gap-14">
+    <section id="testimonials" className="relative px-6 py-16 sm:py-20">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <SectionHeading
           eyebrow="Testimonials"
           title="Let partners tell the story of working with you."
-          description="Replace each card with real quotes, roles, and impact statements that back up your experience."
+          description="Real words from collaborators, leaders, and clients—highlighting trust, impact, and collaboration."
         />
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <Reveal key={testimonial.person} delay={index * 0.05}>
               <figure className="glow-card flex h-full flex-col gap-6 p-8 text-white/75 transition-colors hover:text-white">
+                <span className="text-2xl">{testimonial.icon}</span>
                 <blockquote className="text-sm sm:text-base text-white/80">
                   {testimonial.quote}
                 </blockquote>
                 <figcaption className="mt-auto">
-                  <p className="text-sm font-semibold text-white">{testimonial.person}</p>
+                  <p className="text-sm font-semibold text-white">
+                    {testimonial.person}
+                  </p>
                   <p className="text-xs uppercase tracking-[0.3em] text-white/40">
                     {testimonial.role}
+                  </p>
+                  <p className="mt-2 text-xs text-white/50">
+                    {testimonial.attribution}
                   </p>
                 </figcaption>
               </figure>

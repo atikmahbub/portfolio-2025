@@ -52,7 +52,7 @@ export default function Navbar() {
     >
       <div
         className={clsx(
-          "pointer-events-auto flex w-full max-w-screen-2xl justify-between px-6 pt-8",
+          "pointer-events-auto flex w-full max-w-6xl justify-between  pt-6",
           isOpen && "hidden xl:flex" // hide on mobile when menu open, keep flex on xl
         )}
       >

@@ -192,6 +192,32 @@
   z-index: 2;
 }
 
+.gradient-aurora-text {
+  background: linear-gradient(
+    120deg,
+    rgba(169, 163, 255, 1),
+    rgba(110, 231, 183, 1),
+    rgba(125, 211, 252, 1)
+  );
+  background-size: 200% 200%;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: gradient-aurora 10s ease-in-out infinite;
+}
+
+@keyframes gradient-aurora {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .glow-card,
   .glow-card::before,

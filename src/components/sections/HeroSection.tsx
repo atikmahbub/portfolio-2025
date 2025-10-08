@@ -1,148 +1,167 @@
 "use client";
 
-import TextType from "@/components/TextType";
 import Reveal from "@/components/Reveal";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
 const highlightPills = [
-  "Full-Stack Problem Solver",
-  "Systems Design Enthusiast",
-  "Product-Focused Collaborator",
+  {
+    label: "FULL-STACK PROBLEM SOLVER",
+    gradient:
+      "from-[#6366F1]/25 via-[#8B5CF6]/20 to-transparent border-[#8B5CF6]/40 shadow-[0_18px_38px_-20px_rgba(99,102,241,0.85)]",
+    accent: "bg-[#8B5CF6]",
+  },
+  {
+    label: "DESIGN SYSTEMS ENTHUSIAST",
+    gradient:
+      "from-[#14B8A6]/25 via-[#22D3EE]/20 to-transparent border-[#22D3EE]/35 shadow-[0_18px_38px_-22px_rgba(20,184,166,0.8)]",
+    accent: "bg-[#22D3EE]",
+  },
+  {
+    label: "PRODUCT-FOCUSED BUILDER",
+    gradient:
+      "from-[#F59E0B]/25 via-[#F97316]/20 to-transparent border-[#FB923C]/35 shadow-[0_18px_38px_-22px_rgba(249,115,22,0.8)]",
+    accent: "bg-[#F97316]",
+  },
 ];
+
+const heroHighlight =
+  "Turning ambitious ideas into scalable, elegant, and measurable digital experiences.";
 
 export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[90vh] items-center justify-center px-6 pb-28 pt-32 sm:pt-36 lg:pt-40"
+      className="relative flex min-h-[90vh] items-center justify-center px-6 pb-24 pt-28 sm:pt-32 lg:pt-36"
     >
-      <div className="mx-auto flex w-full max-w-screen-2xl flex-col gap-16">
+      <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-16 text-center">
         <Reveal>
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-medium uppercase tracking-[0.3em] text-white/70">
-              Software Engineer
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <span className="inline-flex items-center gap-3 rounded-full border border-white/25 bg-gradient-to-r from-white/10 via-[#7DD3FC]/25 to-[#A855F7]/25 px-5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.35em] text-white shadow-[0_12px_30px_-15px_rgba(125,211,252,0.8)] transition-transform hover:-translate-y-0.5 hover:shadow-[0_22px_55px_-25px_rgba(125,211,252,0.75)]">
+              {"{ Software Engineer }"}
             </span>
-            <span className="rounded-full border border-[#6EE7B7]/30 px-3 py-1 text-xs font-medium text-[#6EE7B7]/80">
-              Remote-Friendly • Open to Collaborations
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#6EE7B7]/30 bg-gradient-to-r from-[#6EE7B7]/20 via-[#10B981]/20 to-transparent px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#D1FAE5] shadow-[0_12px_30px_-18px_rgba(16,185,129,0.85)] transition-transform hover:-translate-y-0.5 hover:shadow-[0_22px_55px_-30px_rgba(16,185,129,0.75)]">
+              <span className="inline-flex h-1.5 w-1.5 rounded-full bg-[#6EE7B7]" />
+              Remote-Friendly
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#FDE68A]/30 bg-gradient-to-r from-[#FDE68A]/20 via-[#F59E0B]/20 to-transparent px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#FEF3C7] shadow-[0_12px_30px_-18px_rgba(245,158,11,0.75)] transition-transform hover:-translate-y-0.5 hover:shadow-[0_22px_55px_-30px_rgba(245,158,11,0.65)]">
+              <span className="inline-flex h-1.5 w-1.5 rounded-full bg-[#F59E0B]" />
+              {"<Open to Collaborations />"}
             </span>
           </div>
         </Reveal>
 
-        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
-          <div className="flex flex-col gap-10">
+        <div className="flex w-full flex-col items-center gap-14">
+          <div className="flex flex-col items-center gap-10">
             <Reveal>
               <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-                Designing future-proof products with clean code and curious
+                Building future-proof products with clean code and curious
                 mindsets.
               </h1>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <TextType
-                as="p"
-                className="max-w-3xl text-2xl font-medium leading-snug text-[#A9A3FF] sm:text-3xl"
-                text={[
-                  "Building delightful, resilient experiences across the stack.",
-                  "Transforming product requirements into scalable solutions.",
-                  "Championing developer experience and thoughtful architecture.",
-                ]}
-                typingSpeed={55}
-                deletingSpeed={30}
-                pauseDuration={2100}
-                showCursor
-                cursorCharacter="▍"
-                cursorBlinkDuration={0.45}
-                textColors={["#A9A3FF", "#6EE7B7", "#7DD3FC"]}
-                variableSpeed={{ min: 40, max: 80 }}
-                loop
-              />
+              <p className="gradient-aurora-text max-w-3xl text-2xl font-semibold leading-snug sm:text-3xl">
+                {heroHighlight}
+              </p>
             </Reveal>
 
             <Reveal delay={0.2}>
               <p className="max-w-2xl text-lg text-white/70 sm:text-xl">
-                From early ideas to production launches, I craft dependable
-                systems, design intuitive interfaces, and guide teams through
-                smooth delivery. All copy is placeholder for now—we&apos;ll plug
-                in the real story next.
+                Hey 👋 I&apos;m Atik, a full-stack engineer with 6+ years of
+                experience crafting reliable web apps, design systems, and
+                blockchain-integrated products. I love bringing clarity to
+                complex problems and turning concepts into production-ready
+                solutions — fast, thoughtfully, and with a strong sense of
+                craft.
               </p>
             </Reveal>
 
             <Reveal delay={0.25}>
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center justify-center gap-4">
                 <a
                   href="#projects"
-                  className="group inline-flex items-center gap-3 rounded-full bg-[#5227FF] px-7 py-3 text-sm font-semibold text-white shadow-[0_20px_45px_-20px_rgba(82,39,255,0.55)] transition-transform hover:-translate-y-1 hover:bg-[#5f3aff]"
+                  className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#5227FF] via-[#7C3AED] to-[#06B6D4] px-8 py-3 text-sm font-semibold text-white shadow-[0_30px_60px_-25px_rgba(82,39,255,0.75)] ring-1 ring-white/20 transition-all hover:-translate-y-1 hover:shadow-[0_35px_75px_-25px_rgba(6,182,212,0.8)]"
                 >
-                  Explore Placeholder Projects
+                  🚀 Explore My Work
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-3 text-sm font-semibold text-white/80 transition-all hover:-translate-y-1 hover:border-white/50 hover:text-white"
+                  className="group inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/5 px-8 py-3 text-sm font-semibold text-white/80 backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-white/60 hover:text-white"
                 >
-                  Let&apos;s Build Something
+                  🛠️ Let&apos;s Build Something
                 </a>
               </div>
             </Reveal>
           </div>
 
-          <Reveal
-            delay={0.2}
-            className="w-full justify-self-center lg:justify-self-stretch"
-          >
+          <Reveal delay={0.2} className="w-full">
             <div className="glow-card isolate w-full p-8">
-              <div className="flex h-full flex-col gap-6 text-white/80">
+              <div className="flex h-full flex-col items-center gap-6 text-white/80">
                 <div className="space-y-3">
                   <span className="text-xs uppercase tracking-[0.3em] text-white/50">
                     Quick Snapshot
                   </span>
-                  <p className="text-lg">
-                    Pragmatic engineer shaping reliable web apps. Passionate
-                    about design systems, performance, and developer tooling.
+                  <p className="text-lg text-white/90">
+                    Pragmatic engineer shaping modern web experiences.
+                    Passionate about scalability, developer experience, and
+                    clean architecture.
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-2 text-sm text-white/60">
-                  {highlightPills.map((pill) => (
+                <div className="flex flex-wrap justify-center gap-3 text-sm text-white/60">
+                  {highlightPills.map(({ label, gradient, accent }) => (
                     <span
-                      key={pill}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wide"
+                      key={label}
+                      className={`group relative inline-flex items-center gap-3 rounded-full border bg-gradient-to-r ${gradient} px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/90 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:text-white hover:shadow-[0_20px_45px_-22px_rgba(241,245,249,0.6)]`}
                     >
-                      {pill}
+                      <span
+                        className={`inline-flex h-2 w-2 rounded-full ${accent} shadow-[0_0_0_6px_rgba(255,255,255,0.07)]`}
+                      />
+                      {label}
+                      <span className="pointer-events-none absolute inset-x-6 bottom-1 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     </span>
                   ))}
                 </div>
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                 <div className="grid gap-3 text-white/70">
                   <a
-                    href="mailto:placeholder@domain.dev"
-                    className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 transition hover:border-white/30 hover:bg-white/[0.06]"
+                    href="mailto:atikmahbub100@gmail.com"
+                    className="group relative flex w-full flex-col items-center gap-4 overflow-hidden rounded-3xl border border-white/15 bg-white/[0.05] px-6 py-6 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-white/40 hover:shadow-[0_35px_75px_-30px_rgba(125,211,252,0.55)] sm:flex-row sm:items-center sm:justify-between sm:text-left"
                   >
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-white/40">
+                    <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/12 via-[#7C3AED]/15 to-[#06B6D4]/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <span className="relative inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white/80 shadow-[0_18px_38px_-24px_rgba(124,58,237,0.75)] transition-all duration-300 group-hover:bg-white/20 group-hover:text-white">
+                      <Mail className="h-6 w-6" />
+                    </span>
+                    <div className="relative space-y-1">
+                      <p className="text-xs uppercase tracking-[0.35em] text-white/40">
                         Email
                       </p>
-                      <p className="text-sm font-medium text-white">
-                        placeholder@domain.dev
+                      <p className="text-lg font-semibold text-white">
+                        atikmahbub100@gmail.com
                       </p>
                     </div>
-                    <Mail className="h-4 w-4 text-white/50 transition group-hover:text-white" />
+                    <span className="relative hidden text-xs font-semibold uppercase tracking-[0.4em] text-white/50 transition group-hover:text-white sm:inline">
+                      Say Hello
+                    </span>
                   </a>
-                  <div className="flex items-center gap-2 text-white/50">
+                  <div className="flex flex-col items-center gap-2 text-white/50">
                     <span className="text-xs uppercase tracking-[0.3em] text-white/40">
                       Elsewhere
                     </span>
                     <div className="flex gap-2">
                       <a
-                        href="https://github.com/placeholder"
+                        href="https://github.com/atikmahbub"
                         className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-white/40 hover:text-white"
-                        aria-label="Placeholder GitHub"
+                        aria-label="Atik Mahbub GitHub"
+                        target="_blank"
                       >
                         <Github className="h-4 w-4" />
                       </a>
                       <a
-                        href="https://linkedin.com/in/placeholder"
+                        href="https://www.linkedin.com/in/atik-mahbub/"
                         className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-white/40 hover:text-white"
-                        aria-label="Placeholder LinkedIn"
+                        aria-label="Atik Mahbub LinkedIn"
+                        target="_blank"
                       >
                         <Linkedin className="h-4 w-4" />
                       </a>
