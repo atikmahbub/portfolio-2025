@@ -62,21 +62,23 @@ export default function SkillsSection() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {skillBuckets.map((bucket, index) => (
             <Reveal key={bucket.title} delay={index * 0.05}>
-              <div className="glow-card flex h-full flex-col gap-4 p-6 text-white/75 transition-colors hover:text-white">
+              <div className="glow-card flex h-full flex-col gap-4 p-6 text-slate-700 transition-colors hover:text-slate-900 dark:text-white/75 dark:hover:text-white">
                 <div className="space-y-2">
-                  <span className="text-xs uppercase tracking-[0.3em] text-white/40">
+                  <span className="text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-white/40">
                     Discipline
                   </span>
-                  <h3 className="text-xl font-semibold text-white">
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
                     {bucket.title}
                   </h3>
-                  <p className="text-sm text-white/65">{bucket.description}</p>
+                  <p className="text-sm text-slate-600 dark:text-white/65">
+                    {bucket.description}
+                  </p>
                 </div>
                 <ul className="mt-auto space-y-3 text-sm">
                   {bucket.items.map((item) => (
                     <li key={item} className="flex items-center gap-3">
                       <span className="inline-flex h-2 w-2 shrink-0 rounded-full bg-gradient-to-br from-[#A9A3FF] to-[#7DD3FC]" />
-                      <span className="font-semibold text-white/90">
+                      <span className="font-semibold text-slate-700 dark:text-white/90">
                         {item}
                       </span>
                     </li>

@@ -108,24 +108,24 @@ export default function ProjectsSection() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <Reveal key={project.name} delay={index * 0.05}>
-              <article className="glow-card group flex h-full flex-col gap-6 p-7 text-white/80">
-                <span className="self-start rounded-full border border-[#7DD3FC]/30 bg-[#7DD3FC]/10 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-[#7DD3FC]">
+              <article className="glow-card group flex h-full flex-col gap-6 p-7 text-slate-700 transition-colors hover:text-slate-900 dark:text-white/80 dark:hover:text-white">
+                <span className="self-start rounded-full border border-slate-200 bg-white/85 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-slate-600 shadow-sm dark:border-[#7DD3FC]/30 dark:bg-[#7DD3FC]/10 dark:text-[#7DD3FC]">
                   {project.type}
                 </span>
                 <div className="space-y-4">
-                  <h3 className="text-2xl font-semibold text-white">
+                  <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">
                     {project.name}
                   </h3>
-                  <p className="text-sm text-white/70 group-hover:text-white/80">
+                  <p className="text-sm text-slate-600 group-hover:text-slate-800 dark:text-white/70 dark:group-hover:text-white/80">
                     {project.summary}
                   </p>
                 </div>
                 <div className="mt-auto space-y-5">
-                  <div className="flex flex-wrap gap-2 text-xs text-white/60">
+                  <div className="flex flex-wrap gap-2 text-xs text-slate-500 dark:text-white/60">
                     {project.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-medium uppercase tracking-widest"
+                        className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 font-medium uppercase tracking-widest text-slate-600 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white/70"
                       >
                         {tech}
                       </span>
@@ -135,14 +135,14 @@ export default function ProjectsSection() {
                     (project.cta.href ? (
                       <a
                         href={project.cta.href}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#A9A3FF] transition hover:text-white"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-500 transition hover:text-slate-900 dark:text-[#A9A3FF] dark:hover:text-white"
                         target="_blank"
                       >
                         {project.cta.label}
                         <ArrowUpRight className="h-4 w-4" />
                       </a>
                     ) : (
-                      <span className="inline-flex items-center gap-2 text-sm font-semibold text-white/50">
+                      <span className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 dark:text-white/50">
                         {project.cta.label}
                       </span>
                     ))}

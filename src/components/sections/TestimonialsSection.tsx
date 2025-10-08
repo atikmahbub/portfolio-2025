@@ -41,19 +41,19 @@ export default function TestimonialsSection() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <Reveal key={testimonial.person} delay={index * 0.05}>
-              <figure className="glow-card flex h-full flex-col gap-6 p-8 text-white/75 transition-colors hover:text-white">
+              <figure className="glow-card flex h-full flex-col gap-6 p-8 text-slate-700 transition-colors hover:text-slate-900 dark:text-white/75 dark:hover:text-white">
                 <span className="text-2xl">{testimonial.icon}</span>
-                <blockquote className="text-sm sm:text-base text-white/80">
+                <blockquote className="text-sm text-slate-600 sm:text-base dark:text-white/80">
                   {testimonial.quote}
                 </blockquote>
                 <figcaption className="mt-auto">
-                  <p className="text-sm font-semibold text-white">
+                  <p className="text-sm font-semibold text-slate-900 dark:text-white">
                     {testimonial.person}
                   </p>
-                  <p className="text-xs uppercase tracking-[0.3em] text-white/40">
+                  <p className="text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-white/40">
                     {testimonial.role}
                   </p>
-                  <p className="mt-2 text-xs text-white/50">
+                  <p className="mt-2 text-xs text-slate-500 dark:text-white/50">
                     {testimonial.attribution}
                   </p>
                 </figcaption>

@@ -99,29 +99,31 @@ export default function ExperienceSection() {
           <div className="grid gap-6">
             {experiences.map((experience, index) => (
               <Reveal key={experience.timeframe} delay={index * 0.05}>
-                <article className="glow-card flex flex-col gap-4 p-6 text-white">
+                <article className="glow-card flex flex-col gap-4 p-6 text-slate-700 dark:text-white">
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#7DD3FC]/30 bg-[#7DD3FC]/10 text-sm font-semibold text-[#7DD3FC]">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-sm font-semibold text-slate-700 shadow-sm dark:border-[#7DD3FC]/30 dark:bg-[#7DD3FC]/10 dark:text-[#7DD3FC]">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+                      <p className="text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-white/50">
                         {experience.timeframe}
                       </p>
-                      <h3 className="text-xl font-semibold text-white">
+                      <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
                         {experience.title}
                       </h3>
-                      <p className="text-sm text-[#A9A3FF]">
+                      <p className="text-sm text-indigo-500 dark:text-[#A9A3FF]">
                         {experience.company}
                       </p>
                       {experience.location && (
-                        <p className="text-xs text-white/50">
+                        <p className="text-xs text-slate-500 dark:text-white/50">
                           {experience.location}
                         </p>
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-white/75">{experience.focus}</p>
+                  <p className="text-sm text-slate-600 dark:text-white/75">
+                    {experience.focus}
+                  </p>
                 </article>
               </Reveal>
             ))}
@@ -129,14 +131,14 @@ export default function ExperienceSection() {
 
           <div className="grid gap-6 lg:pl-6">
             <Reveal>
-              <div className="glow-card p-6 text-white/80 transition-colors hover:text-white">
-                <span className="text-xs uppercase tracking-[0.3em] text-white/50">
+              <div className="glow-card p-6 text-slate-700 transition-colors hover:text-slate-900 dark:text-white/80 dark:hover:text-white">
+                <span className="text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-white/50">
                   Focus Areas
                 </span>
-                <h3 className="mt-3 text-2xl font-semibold text-white">
+                <h3 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-white">
                   Collaboration that scales with your ambitions.
                 </h3>
-                <p className="mt-4 text-sm text-white/65">
+                <p className="mt-4 text-sm text-slate-600 dark:text-white/65">
                   I thrive in spaces where strong engineering practices meet
                   product vision. These are the areas where I bring clarity,
                   structure, and impact to teams and products.
@@ -147,16 +149,16 @@ export default function ExperienceSection() {
             <div className="grid gap-4 sm:grid-cols-2">
               {focusTiles.map((tile, index) => (
                 <Reveal key={tile.title} delay={index * 0.05}>
-                  <div className="glow-card flex h-full flex-col gap-3 px-5 py-4 text-white/80 transition-all duration-300 hover:-translate-y-1 hover:text-white">
+                  <div className="glow-card flex h-full flex-col gap-3 px-5 py-4 text-slate-700 transition-all duration-300 hover:-translate-y-1 hover:text-slate-900 dark:text-white/80 dark:hover:text-white">
                     <div className="flex items-center gap-3">
-                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#7DD3FC]/30 bg-[#7DD3FC]/10 text-sm font-semibold text-[#7DD3FC]">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-sm font-semibold text-slate-700 shadow-sm dark:border-[#7DD3FC]/30 dark:bg-[#7DD3FC]/10 dark:text-[#7DD3FC]">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <h4 className="text-sm font-semibold text-white">
+                      <h4 className="text-sm font-semibold text-slate-900 dark:text-white">
                         {tile.title}
                       </h4>
                     </div>
-                    <p className="text-xs text-white/70 sm:text-sm">
+                    <p className="text-xs text-slate-600 sm:text-sm dark:text-white/70">
                       {tile.description}
                     </p>
                   </div>

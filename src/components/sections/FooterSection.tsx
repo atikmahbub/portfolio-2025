@@ -18,37 +18,37 @@ export default function FooterSection() {
   return (
     <footer className="relative px-6 pb-16">
       <Reveal>
-        <div className="mx-auto w-full max-w-6xl rounded-3xl border border-white/10 bg-white/[0.04] px-6 py-8 text-sm text-white/60 backdrop-blur">
+        <div className="mx-auto w-full max-w-6xl rounded-3xl border border-slate-200 bg-white/85 px-6 py-8 text-sm text-slate-500 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/[0.04] dark:text-white/60">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-base text-white/70">
+            <p className="text-base text-slate-700 dark:text-white/70">
               Crafting scalable products, AI-driven experiences, and future-ready systems — with clean code and curious
               minds. ✨
             </p>
-            <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.3em] text-white/40">
+            <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-white/40">
               <a
                 href="#home"
                 onClick={(event) => handleSmoothScroll(event, "home")}
-                className="transition hover:text-white"
+                className="transition hover:text-slate-900 dark:hover:text-white"
               >
                 Back to top
               </a>
               <a
                 href="#projects"
                 onClick={(event) => handleSmoothScroll(event, "projects")}
-                className="transition hover:text-white"
+                className="transition hover:text-slate-900 dark:hover:text-white"
               >
                 Projects
               </a>
               <a
                 href="#contact"
                 onClick={(event) => handleSmoothScroll(event, "contact")}
-                className="transition hover:text-white"
+                className="transition hover:text-slate-900 dark:hover:text-white"
               >
                 Contact
               </a>
             </div>
           </div>
-          <div className="mt-6 text-xs uppercase tracking-[0.3em] text-white/30">
+          <div className="mt-6 text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-white/30">
             © 2025 Atik Mahbub. All rights reserved.
           </div>
         </div>

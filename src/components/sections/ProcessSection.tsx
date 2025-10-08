@@ -33,14 +33,14 @@ export default function ProcessSection() {
         <div className="grid gap-6 md:grid-cols-3">
           {phases.map((phase, index) => (
             <Reveal key={phase.stage} delay={index * 0.07}>
-              <div className="glow-card group flex h-full flex-col gap-4 p-8 text-white/75 transition-colors hover:text-white">
-                <span className="text-xs font-semibold uppercase tracking-[0.4em] text-white/45 group-hover:text-white/60">
+              <div className="glow-card group flex h-full flex-col gap-4 p-8 text-slate-700 transition-colors hover:text-slate-900 dark:text-white/75 dark:hover:text-white">
+                <span className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500 group-hover:text-slate-700 dark:text-white/45 dark:group-hover:text-white/60">
                   {phase.stage}
                 </span>
-                <h3 className="text-2xl font-semibold text-white">
+                <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">
                   {phase.title}
                 </h3>
-                <p className="text-sm text-white/70 group-hover:text-white/80">
+                <p className="text-sm text-slate-600 group-hover:text-slate-800 dark:text-white/70 dark:group-hover:text-white/80">
                   {phase.copy}
                 </p>
               </div>
