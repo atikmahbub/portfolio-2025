@@ -31,7 +31,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[90vh] items-center justify-center px-6 pb-24 pt-28 sm:pt-32 lg:pt-36"
+      className="relative flex min-h-[90vh] items-center justify-center px-6 pb-20 pt-12 sm:pt-16 lg:pt-20"
     >
       <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-16 text-center">
         <Reveal>
