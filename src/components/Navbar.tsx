@@ -60,7 +60,7 @@ export default function Navbar() {
         {" "}
         <nav
           className={clsx(
-            "glow-card flex w-full items-center justify-between gap-4 rounded-full border border-slate-200/80 bg-white/80 px-6 py-3 text-sm text-slate-700 transition-all duration-500 backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:text-white/80 xl:rounded-[3rem]",
+            "flex w-full items-center justify-between gap-4 rounded-full border border-slate-200/80 bg-white/80 px-6 py-3 text-sm text-slate-700 transition-all duration-500 backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:text-white/80 xl:rounded-[3rem]",
             isScrolled ? "scale-[1.01]" : "",
             isOpen
               ? "opacity-0 pointer-events-none xl:opacity-100 xl:pointer-events-auto"
@@ -110,8 +110,8 @@ export default function Navbar() {
 
       {isOpen ? (
         <div className="pointer-events-auto mt-[0rem] flex w-full justify-center px-0 xl:hidden">
-          <div className="flex w-full flex-col gap-4 px-6">
-            <div className="glow-card flex items-center justify-between rounded-full border border-slate-200/80 bg-white/80 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-white/60">
+          <div className="flex w-full flex-col gap-4">
+            <div className="flex items-center justify-between rounded-full border border-slate-200/80 bg-white/80 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-white/60">
               <span className="inline-flex items-center gap-2">
                 <span className="inline-flex h-2 w-2 rounded-full bg-[#7DD3FC]" />
                 Atik Mahbub
