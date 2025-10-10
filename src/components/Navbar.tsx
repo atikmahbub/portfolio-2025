@@ -125,7 +125,7 @@ export default function Navbar() {
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <div className="glow-card rounded-[2.5rem] border border-slate-200/80 bg-white/80 p-4 text-xs uppercase tracking-[0.3em] text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-white/60">
+            <div className="rounded-[2.5rem] border border-slate-200/80 bg-white/80 p-4 text-xs uppercase tracking-[0.3em] text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-white/60">
               <div className="mb-3 flex justify-between rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 text-slate-600 dark:border-white/15 dark:bg-white/5 dark:text-white/70">
                 <span>Theme</span>
                 <ThemeToggle variant="pill" />
