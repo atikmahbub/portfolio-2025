@@ -48,7 +48,7 @@ export default function Navbar() {
 
   return (
     <header
-      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center"
+      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center bg-white pt-2 dark:bg-slate-950"
       role="navigation"
     >
       <div
