@@ -23,7 +23,7 @@ const contactOptions: ContactOption[] = [
   {
     label: "Resume",
     value: "Download my latest résumé →",
-    href: "/Atik_Mahbub_CV.pdf",
+    href: "/Atik_Mahbub_CV_1.pdf",
     download: true,
   },
 ];
