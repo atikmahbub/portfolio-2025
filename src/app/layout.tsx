@@ -10,17 +10,7 @@ import ThemeScript from "@/components/ThemeScript";
 const poppins = Poppins({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight: [
-    "100",
-    "200",
-    "300",
-    "400",
-    "500",
-    "600",
-    "700",
-    "800",
-    "900",
-  ],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 const inconsolata = Inconsolata({
@@ -58,7 +48,7 @@ export const metadata: Metadata = {
     title: "Atik Mahbub — Full-Stack Engineer",
     description:
       "Building scalable products, AI agent experiences, and Web3-integrated platforms with a curious, craft-driven mindset.",
-    url: "https://atikmahbub.com",
+    url: "https://atikmahbub.netlify.app",
     siteName: "Atik Mahbub Portfolio",
     locale: "en_US",
     type: "website",
@@ -98,7 +88,7 @@ const structuredData = {
       "@id": "https://atikmahbub.netlify.app/#website",
       url: "https://atikmahbub.netlify.app",
       name: "Atik Mahbub Portfolio",
-      publisher: { "@id": "https://atikmahbub.com/#person" },
+      publisher: { "@id": "https://atikmahbub.netlify.app/#person" },
       inLanguage: "en-US",
     },
   ],
@@ -111,11 +101,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Google Search Console verification for Netlify site */}
+        <meta
+          name="google-site-verification"
+          content="yuqjN30EZzmBHNsf2nKefO8rATnz2pR6Uo3x734rCsw"
+        />
+        {/* you can add other head meta tags here if needed */}
+      </head>
+
       <body
         className={`${poppins.variable} ${inconsolata.variable} min-h-screen antialiased transition-colors duration-500`}
       >
         <ThemeScript />
-        <Script id="structured-data" type="application/ld+json" strategy="afterInteractive">
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          strategy="afterInteractive"
+        >
           {JSON.stringify(structuredData)}
         </Script>
         <Providers>
