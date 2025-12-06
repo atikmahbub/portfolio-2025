@@ -1,11 +1,13 @@
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import { ArrowUpRight } from "lucide-react";
+import { preventOrphans } from "@/lib/utils";
 
 type Project = {
   name: string;
   type: string;
   summary: string;
+  outcome?: string;
   stack: string[];
   cta?: {
     label: string;
@@ -13,12 +15,32 @@ type Project = {
   };
 };
 
+const projectMetrics = [
+  {
+    label: "Launches",
+    value: "20+",
+    description: "Net-new products, design systems, and internal tools",
+  },
+  {
+    label: "Stacks",
+    value: "Web, AI, Web3",
+    description: "Pairing React/Next.js with data, AI, or EVM layers",
+  },
+  {
+    label: "Engagement",
+    value: "0 → 1 & Scale",
+    description: "Comfortable jumping into greenfield or established teams",
+  },
+];
+
 const projects: Project[] = [
   {
     name: "Tracking Wallet",
     type: "Full-stack Fintech Web App",
     summary:
-      "Tracking Wallet is a modern personal finance platform for tracking daily expenses, loans, and recurring transactions. I architected the Express + Prisma + MySQL backend, integrated Auth0 for secure authentication, and shipped a responsive React front-end. Deployed via Netlify and Railway in a monorepo foundation, the build showcases end-to-end ownership with scalability top of mind.",
+      "Built a personal finance tracker with an Express + Prisma + MySQL backend, Auth0 auth, and a Netlify + Railway monorepo.",
+    outcome:
+      "Early users could sort expenses and recurring payments right after launch.",
     stack: [
       "React",
       "TypeScript",
@@ -38,7 +60,9 @@ const projects: Project[] = [
     name: "Omni Intelligence",
     type: "AI + Operations Platform",
     summary:
-      "Omni Intelligence unites business units under a single operational dashboard. As a front-end engineer, I built modular React UI components and documentation with Docusaurus, ensuring the platform could scale smoothly across teams. This project sharpened my approach to structuring complex enterprise applications.",
+      "Built modular React components plus Docusaurus docs so a shared ops dashboard stayed easy to extend.",
+    outcome:
+      "New teams shipped features in under two sprints by reusing the documented patterns.",
     stack: ["React", "Docusaurus", "Redux", "Docker", "TypeScript"],
     cta: {
       label: "View Case Study →",
@@ -49,7 +73,9 @@ const projects: Project[] = [
     name: "Smart Retina",
     type: "Medical AI Screening Platform",
     summary:
-      "Smart Retina empowers eye-care professionals to detect Diabetic Retinopathy with AI image analysis. I delivered critical React interfaces and secure data flows to Django REST services, enabling fast screenings and automated AI predictions. It pairs healthcare rigor with modern cloud infrastructure for mission-critical impact.",
+      "Delivered React UIs and Django REST flows that let eye-care teams run AI screenings for Diabetic Retinopathy.",
+    outcome:
+      "Clinics spent less time on manual review thanks to instant AI second opinions.",
     stack: ["React", "Django REST", "Redux", "Docker", "Azure"],
     cta: {
       label: "View Case Study →",
@@ -60,7 +86,9 @@ const projects: Project[] = [
     name: "1Shot Prompt Builder",
     type: "Smart Contract Prompt Orchestration Platform",
     summary:
-      "1Shot Prompt Builder is a Web3-integrated developer platform for orchestrating smart contract functions into reusable “prompts.” I led the React + Next.js architecture, implemented deep EVM integrations with ethers.js, and built recursive ABI parsing to dynamically render nested contract inputs. OpenAI embeddings and vector search power semantic discovery, keeping workflows intelligent and developer-friendly.",
+      "Led the React + Next.js build for a Web3 prompt builder with ethers.js, recursive ABI parsing, and OpenAI-powered search.",
+    outcome:
+      "Protocol teams now templatize EVM workflows and share them like reusable building blocks.",
     stack: [
       "React",
       "Next.js",
@@ -79,14 +107,18 @@ const projects: Project[] = [
     name: "Glu",
     type: "Education Platform",
     summary:
-      "A collaborative web platform connecting schools, teachers, parents, and students through shared dashboards and communication tools. I focused on TypeScript and Docker-powered workflows that kept shipping velocity high while ensuring reliability for classroom use.",
+      "Built shared dashboards and messaging so schools, teachers, and families could stay aligned. Leaned on TypeScript + Docker workflows to keep releases calm.",
+    outcome:
+      "Multiple districts finally had one place for updates and analytics.",
     stack: ["React", "Node.js", "TypeScript", "Docker"],
   },
   {
     name: "Istanbul Medic Agent",
     type: "AI Agentic Platform (In Progress)",
     summary:
-      "Building healthcare agents that support contextual Q&A, RAG-powered interactions, and secure appointment flows.",
+      "Designing healthcare agents that answer questions, surface RAG insights, and handle secure appointments.",
+    outcome:
+      "Goal: let patients get quick help while keeping clinicians in control.",
     stack: ["Next.js 15", "Tailwind", "OpenAI SDK", "Vectors"],
     cta: {
       label: "Future Case Study →",
@@ -97,13 +129,32 @@ const projects: Project[] = [
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="relative px-6 py-16 sm:py-20">
+    <section id="projects" className="relative px-6 py-12 sm:py-20">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <SectionHeading
           eyebrow="Projects"
           title="Product work across fintech, AI, and healthcare."
-          description="A sample of platforms I’ve architected or helped scale—each pairing strong product vision with thoughtful engineering."
+          description="A handful of builds I’ve helped bring to life, from finance tools to AI agents."
         />
+
+        <Reveal>
+          <div className="grid gap-4 md:grid-cols-3">
+            {projectMetrics.map((metric) => (
+              <div
+                key={metric.label}
+                className="rounded-3xl border border-slate-200/70 bg-white/70 px-5 py-4 text-left text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-white/70"
+              >
+                <p className="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/40">
+                  {metric.label}
+                </p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">
+                  {metric.value}
+                </p>
+                <p className="mt-1 text-sm">{metric.description}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
@@ -114,11 +165,16 @@ export default function ProjectsSection() {
                 </span>
                 <div className="space-y-4">
                   <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">
-                    {project.name}
+                    {preventOrphans(project.name)}
                   </h3>
                   <p className="text-sm text-slate-600 group-hover:text-slate-800 dark:text-white/70 dark:group-hover:text-white/80">
-                    {project.summary}
+                    {preventOrphans(project.summary)}
                   </p>
+                  {project.outcome ? (
+                    <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                      {preventOrphans(project.outcome)}
+                    </p>
+                  ) : null}
                 </div>
                 <div className="mt-auto space-y-5">
                   <div className="flex flex-wrap gap-2 text-xs text-slate-500 dark:text-white/60">

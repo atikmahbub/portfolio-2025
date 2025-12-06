@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Poppins, Inconsolata } from "next/font/google";
 import "./globals.css";
 import DotGridBackground from "@/components/DotGridBackground";
@@ -29,7 +30,7 @@ const inconsolata = Inconsolata({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://atikmahbub.com"),
+  metadataBase: new URL("https://atikmahbub.netlify.app"),
   title: {
     default: "Atik Mahbub — Full-Stack Engineer",
     template: "%s | Atik Mahbub",
@@ -50,6 +51,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Atik Mahbub" }],
   creator: "Atik Mahbub",
+  alternates: {
+    canonical: "https://atikmahbub.netlify.app",
+  },
   openGraph: {
     title: "Atik Mahbub — Full-Stack Engineer",
     description:
@@ -71,6 +75,35 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://atikmahbub.netlify.app/#person",
+      name: "Atik Mahbub",
+      jobTitle: "Full-Stack Engineer",
+      url: "https://atikmahbub.netlify.app",
+      sameAs: [
+        "https://github.com/atikmahbub",
+        "https://www.linkedin.com/in/atik-mahbub/",
+      ],
+      worksFor: {
+        "@type": "Organization",
+        name: "Atik Mahbub Studio",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://atikmahbub.netlify.app/#website",
+      url: "https://atikmahbub.netlify.app",
+      name: "Atik Mahbub Portfolio",
+      publisher: { "@id": "https://atikmahbub.com/#person" },
+      inLanguage: "en-US",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -82,6 +115,9 @@ export default function RootLayout({
         className={`${poppins.variable} ${inconsolata.variable} min-h-screen antialiased transition-colors duration-500`}
       >
         <ThemeScript />
+        <Script id="structured-data" type="application/ld+json" strategy="afterInteractive">
+          {JSON.stringify(structuredData)}
+        </Script>
         <Providers>
           <DotGridBackground />
           <Navbar />

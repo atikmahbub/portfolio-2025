@@ -1,11 +1,13 @@
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
+import { preventOrphans } from "@/lib/utils";
 
 const skillBuckets = [
   {
     title: "Product-Led Craft",
     description:
-      "Bringing architecture, UX, and strategy together to ship meaningful products.",
+      "Tie architecture, UX, and roadmap goals together so launches feel smooth.",
+    spotlight: "From kickoff chats to QA sign-off.",
     items: [
       "UX Collaboration",
       "Roadmap Co-Creation",
@@ -18,7 +20,8 @@ const skillBuckets = [
   {
     title: "Engineering Stack",
     description:
-      "The tools and technologies I rely on to build scalable, modern, and intelligent systems.",
+      "Tools I lean on to build modern, scalable systems.",
+    spotlight: "TypeScript across web, mobile, and services.",
     items: [
       "TypeScript",
       "React",
@@ -36,7 +39,8 @@ const skillBuckets = [
   {
     title: "Ways of Working",
     description:
-      "How I guide teams, processes, and systems across the entire product lifecycle—ensuring clarity, velocity, and resilience.",
+      "Simple habits that keep remote teams aligned from start to finish.",
+    spotlight: "Remote rituals that keep everyone in sync.",
     items: [
       "Technical Leadership",
       "Mentorship",
@@ -51,12 +55,12 @@ const skillBuckets = [
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="relative px-6 py-16 sm:py-20">
+    <section id="skills" className="relative px-6 py-12 sm:py-20">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <SectionHeading
           eyebrow="Capabilities"
           title="Where engineering meets product vision."
-          description="Aligning clean architecture, UX, and strategy to ship meaningful products."
+          description="How I blend product thinking with dependable engineering habits."
         />
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -68,11 +72,16 @@ export default function SkillsSection() {
                     Discipline
                   </span>
                   <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                    {bucket.title}
+                    {preventOrphans(bucket.title)}
                   </h3>
                   <p className="text-sm text-slate-600 dark:text-white/65">
-                    {bucket.description}
+                    {preventOrphans(bucket.description)}
                   </p>
+                  {bucket.spotlight ? (
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 dark:text-white/50">
+                      {preventOrphans(bucket.spotlight)}
+                    </p>
+                  ) : null}
                 </div>
                 <ul className="mt-auto space-y-3 text-sm">
                   {bucket.items.map((item) => (
@@ -84,6 +93,12 @@ export default function SkillsSection() {
                     </li>
                   ))}
                 </ul>
+                <a
+                  href="#projects"
+                  className="inline-flex items-center text-xs font-semibold uppercase tracking-[0.35em] text-slate-500 transition hover:text-slate-900 dark:text-white/60 dark:hover:text-white"
+                >
+                  See examples →
+                </a>
               </div>
             </Reveal>
           ))}

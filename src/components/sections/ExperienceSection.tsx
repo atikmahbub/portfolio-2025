@@ -1,5 +1,6 @@
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
+import { preventOrphans } from "@/lib/utils";
 
 const experiences = [
   {
@@ -8,7 +9,11 @@ const experiences = [
     company: "UXLY Software · Full-time",
     location: "United States · Remote",
     focus:
-      "Driving TypeScript + React feature development for data-rich SaaS workflows, aligning cross-functional squads and shipping remote-first customer experiences.",
+      "Ship TypeScript + React features for a data-heavy SaaS platform and keep remote squads working smoothly together.",
+    highlights: [
+      "Built analytics dashboards that stay fast even with live data.",
+      "Coached teammates on simple telemetry and QA habits to avoid regressions.",
+    ],
   },
   {
     timeframe: "Jul 2022 — Oct 2024",
@@ -16,7 +21,11 @@ const experiences = [
     company: "Snickerdoodle Labs · Full-time",
     location: "United States · Remote",
     focus:
-      "Owned end-to-end initiatives for a Web3 loyalty platform, modernized a large React/TypeScript codebase, and partnered with product to deliver privacy-preserving user journeys.",
+      "Owned end-to-end work for a Web3 loyalty app, refreshed a large React/TypeScript codebase, and helped product keep privacy front-and-center.",
+    highlights: [
+      "Rebuilt legacy React screens with clean, reusable components.",
+      "Scaled privacy-first flows across wallets, auth, and on-chain data.",
+    ],
   },
   {
     timeframe: "Feb 2022 — Jun 2022",
@@ -24,7 +33,11 @@ const experiences = [
     company: "Hypernet Labs · Full-time",
     location: "California, United States · Remote",
     focus:
-      "Built performant React dashboards on top of decentralized compute APIs, streamlined TypeScript integrations, and shipped features on a tight growth timeline.",
+      "Built fast React dashboards on decentralized compute APIs and kept TypeScript integrations tidy on a tight timeline.",
+    highlights: [
+      "Designed simple data flows for decentralized compute nodes.",
+      "Paired with backend teams to lock down TypeScript contracts quickly.",
+    ],
   },
   {
     timeframe: "Sep 2021 — May 2022",
@@ -32,7 +45,11 @@ const experiences = [
     company: "Yami · Freelance",
     location: "India · Remote",
     focus:
-      "Delivered production-ready Node/TypeScript services and React micro frontends for fintech clients, coordinating hands-on with distributed stakeholders.",
+      "Delivered Node/TypeScript services and React micro frontends for fintech clients while juggling fully remote stakeholders.",
+    highlights: [
+      "Launched micro frontends that dropped cleanly into existing portals.",
+      "Kept async reviews moving so scope stayed tight.",
+    ],
   },
   {
     timeframe: "Feb 2021 — Jul 2021",
@@ -40,7 +57,11 @@ const experiences = [
     company: "Antino · Freelance",
     location: "India · Remote",
     focus:
-      "Rapidly prototyped React experiences, refined design handoffs, and embedded TypeScript best practices across multiple healthcare and logistics engagements.",
+      "Prototyped React experiences for healthcare and logistics teams and improved their TypeScript handoffs.",
+    highlights: [
+      "Turned rough Figma ideas into production-ready React components.",
+      "Left behind linting/testing setups that teams still use.",
+    ],
   },
   {
     timeframe: "Nov 2019 — Jan 2021",
@@ -48,7 +69,11 @@ const experiences = [
     company: "Smart Retina · Full-time",
     location: "Gulshan, Dhaka, Bangladesh",
     focus:
-      "Delivered Django REST-powered services and React interfaces for healthcare analytics, coordinating closely with product leads to launch clinic-ready tools.",
+      "Shipped Django REST services and React UIs for an eye-care analytics platform.",
+    highlights: [
+      "Helped clinicians trust AI predictions with clear UI states.",
+      "Kept data flows secure between React and Django REST.",
+    ],
   },
 ];
 
@@ -87,44 +112,62 @@ const focusTiles = [
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="relative px-6 py-16 sm:py-20">
+    <section id="experience" className="relative px-6 py-12 sm:py-20">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <SectionHeading
           eyebrow="Experience"
           title="Trusted to guide roadmap-critical initiatives."
-          description="Timeline is placeholder—swap with your actual roles, impact statements, and quantifiable wins when ready."
+          description="A look at the teams I've helped and the kind of work I lead day to day."
         />
 
         <div className="grid gap-12 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
           <div className="grid gap-6">
             {experiences.map((experience, index) => (
               <Reveal key={experience.timeframe} delay={index * 0.05}>
-                <article className="glow-card flex flex-col gap-4 p-6 text-slate-700 dark:text-white">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-sm font-semibold text-slate-700 shadow-sm dark:border-[#7DD3FC]/30 dark:bg-[#7DD3FC]/10 dark:text-[#7DD3FC]">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-white/50">
-                        {experience.timeframe}
-                      </p>
-                      <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                        {experience.title}
-                      </h3>
-                      <p className="text-sm text-indigo-500 dark:text-[#A9A3FF]">
-                        {experience.company}
-                      </p>
-                      {experience.location && (
-                        <p className="text-xs text-slate-500 dark:text-white/50">
-                          {experience.location}
-                        </p>
-                      )}
-                    </div>
+                <div className="flex gap-4">
+                  <div className="flex flex-col items-center">
+                    <span className="inline-flex h-4 w-4 rounded-full bg-gradient-to-r from-[#7C3AED] via-[#6366F1] to-[#06B6D4] shadow-[0_0_0_6px_rgba(99,102,241,0.2)] dark:shadow-[0_0_0_6px_rgba(125,211,252,0.25)]" />
+                    {index !== experiences.length - 1 && (
+                      <span className="mt-1 h-full w-px bg-slate-200 dark:bg-white/10" />
+                    )}
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-white/75">
-                    {experience.focus}
-                  </p>
-                </article>
+                  <article className="glow-card flex flex-1 flex-col gap-4 p-6 text-slate-700 dark:text-white">
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-sm font-semibold text-slate-700 shadow-sm dark:border-[#7DD3FC]/30 dark:bg-[#7DD3FC]/10 dark:text-[#7DD3FC]">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-white/50">
+                          {preventOrphans(experience.timeframe)}
+                        </p>
+                        <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
+                          {preventOrphans(experience.title)}
+                        </h3>
+                        <p className="text-sm text-indigo-500 dark:text-[#A9A3FF]">
+                          {preventOrphans(experience.company)}
+                        </p>
+                        {experience.location && (
+                          <p className="text-xs text-slate-500 dark:text-white/50">
+                            {preventOrphans(experience.location)}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-sm text-slate-600 dark:text-white/75">
+                      {preventOrphans(experience.focus)}
+                    </p>
+                    {experience.highlights ? (
+                      <ul className="grid gap-2 text-sm text-slate-600 dark:text-white/75">
+                        {experience.highlights.map((highlight) => (
+                          <li key={highlight} className="flex gap-2">
+                            <span className="mt-2 h-1 w-1 rounded-full bg-slate-400 dark:bg-white/60" />
+                            <span>{preventOrphans(highlight)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </article>
+                </div>
               </Reveal>
             ))}
           </div>
@@ -136,12 +179,12 @@ export default function ExperienceSection() {
                   Focus Areas
                 </span>
                 <h3 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-white">
-                  Collaboration that scales with your ambitions.
+                  {preventOrphans("Collaboration that scales with your ambitions.")}
                 </h3>
                 <p className="mt-4 text-sm text-slate-600 dark:text-white/65">
-                  I thrive in spaces where strong engineering practices meet
-                  product vision. These are the areas where I bring clarity,
-                  structure, and impact to teams and products.
+                  {preventOrphans(
+                    "I thrive in spaces where strong engineering practices meet product vision. These are the areas where I bring clarity, structure, and impact to teams and products.",
+                  )}
                 </p>
               </div>
             </Reveal>
@@ -155,11 +198,11 @@ export default function ExperienceSection() {
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <h4 className="text-sm font-semibold text-slate-900 dark:text-white">
-                        {tile.title}
+                        {preventOrphans(tile.title)}
                       </h4>
                     </div>
                     <p className="text-xs text-slate-600 sm:text-sm dark:text-white/70">
-                      {tile.description}
+                      {preventOrphans(tile.description)}
                     </p>
                   </div>
                 </Reveal>

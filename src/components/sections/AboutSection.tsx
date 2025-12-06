@@ -1,5 +1,6 @@
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
+import { preventOrphans } from "@/lib/utils";
 
 const focusAreas = [
   {
@@ -7,21 +8,21 @@ const focusAreas = [
     label: "End-to-End Ownership",
     headline: "Own the journey from discovery to launch.",
     description:
-      "Drive the full product lifecycle with a balance of velocity and engineering rigor, so every build lands on strategy and stays resilient post-launch.",
+      "Stay close to the problem, write the plan, build the thing, and keep watching it once it ships.",
   },
   {
     number: "02",
     label: "Design Systems & DX",
     headline: "Ship consistently, confidently, and fast.",
     description:
-      "Craft modular systems, intuitive documentation, and frictionless tooling that empower teams to move in sync—without sacrificing craft.",
+      "Build components, docs, and tooling that make it easy for every teammate to do their best work.",
   },
   {
     number: "03",
     label: "Scalable Architecture",
     headline: "Engineer clarity that scales with the roadmap.",
     description:
-      "Design resilient services, observability layers, and automation pipelines fit for real-world traffic and evolving product bets.",
+      "Lay down services, automation, and monitoring that handle real traffic without surprises.",
   },
 ];
 
@@ -31,43 +32,52 @@ const quickStats = [
   "Full-Stack zones of expertise",
 ];
 
+const principles = [
+  {
+    title: "Clarity beats volume.",
+    description: "If everyone understands the plan, the build stays calm and honest.",
+  },
+  {
+    title: "Systems over silver bullets.",
+    description: "Great teams rely on habits—tests, monitoring, and docs—not heroics.",
+  },
+  {
+    title: "Momentum with care.",
+    description: "Move fast, check in often, and keep people in the loop.",
+  },
+];
+
 export default function AboutSection() {
   return (
-    <section id="about" className="relative px-6 py-16 sm:py-20">
+    <section id="about" className="relative px-6 py-12 sm:py-20">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <SectionHeading
           eyebrow="About"
           title="Shaping polished experiences with technical empathy."
-          description="Full-stack engineer blending product vision with scalable, sustainable engineering craft."
+          description="Full-stack engineer who mixes product sense with reliable code and kind communication."
         />
 
         <div className="grid gap-12 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
           <div className="flex flex-col gap-8 text-base text-slate-600 sm:text-lg dark:text-white/70">
             <Reveal>
               <p>
-                I&apos;m a full-stack engineer who loves untangling complex
-                product challenges and translating them into clean, scalable
-                solutions. My approach blends fast iteration with thoughtful
-                architecture, enabling teams to move quickly without sacrificing
-                long-term stability or developer experience.
+                {preventOrphans(
+                  "I like taking messy product ideas and turning them into simple, sturdy shipping plans. The goal is always the same: move fast without leaving a trail of stress behind.",
+                )}
               </p>
             </Reveal>
             <Reveal delay={0.1}>
               <p>
-                Over the last 6+ years, I&apos;ve collaborated with designers,
-                PMs, and engineers across startups and scaling teams to build
-                reliable web apps, robust backend systems, blockchain
-                integrations, and elegant design systems. Whether I&apos;m
-                refining developer workflows, architecting resilient
-                infrastructure, or mentoring teammates, I focus on clarity,
-                scalability, and sustainable growth.
+                {preventOrphans(
+                  "Across 6+ years I've paired with founders, designers, and engineers to build web apps, systems, and design libraries. Clean code, good docs, and honest check-ins help everyone stay in sync.",
+                )}
               </p>
             </Reveal>
             <Reveal delay={0.2}>
               <p>
-                I thrive at the intersection of product vision and engineering
-                depth—shaping systems that scale, teams that move fast, and
-                experiences that feel effortless.
+                {preventOrphans(
+                  "I thrive where product thinking and engineering depth meet—keeping teams confident while features make their way to production.",
+                )}
               </p>
             </Reveal>
           </div>
@@ -123,15 +133,43 @@ export default function AboutSection() {
                       </span>
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                      {area.headline}
+                      {preventOrphans(area.headline)}
                     </h3>
                     <p className="text-sm text-slate-600 group-hover:text-slate-800 dark:text-white/75 dark:group-hover:text-white/90">
-                      {area.description}
+                      {preventOrphans(area.description)}
                     </p>
                   </div>
                 </Reveal>
               ))}
             </div>
+
+            <Reveal delay={0.2}>
+              <div className="glow-card grid gap-4 p-6 text-slate-700 dark:text-white/80">
+                <div className="flex items-center justify-between">
+                  <p className="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/50">
+                    Working Principles
+                  </p>
+                  <span className="rounded-full border border-slate-200/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-600 dark:border-white/20 dark:text-white/80">
+                    Built with teams
+                  </span>
+                </div>
+                <div className="grid gap-3 md:grid-cols-3">
+                  {principles.map((principle) => (
+                    <div
+                      key={principle.title}
+                      className="rounded-2xl border border-slate-200/70 bg-white/70 p-4 text-sm leading-relaxed text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-white/80"
+                    >
+                      <p className="text-base font-semibold text-slate-900 dark:text-white">
+                        {preventOrphans(principle.title)}
+                      </p>
+                      <p className="mt-2 text-sm">
+                        {preventOrphans(principle.description)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </div>
