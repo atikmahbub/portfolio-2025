@@ -115,15 +115,20 @@ export default function HeroSection() {
           </div>
         </Reveal>
         <Reveal delay={0.05} className="w-full md:max-w-max">
-          <div className="flex w-full flex-col items-center gap-4 rounded-3xl border border-slate-200/80 bg-white/80 px-6 py-4 text-center shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)] backdrop-blur-2xl dark:border-white/15 dark:bg-white/10 dark:text-white sm:flex-row sm:items-center sm:justify-between sm:text-left">
-            <div className="text-5xl font-bold leading-none text-indigo-600 dark:text-white">
-              6+
-            </div>
-            <div className="space-y-1 text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-white/60">
-              <span className="block text-base font-semibold normal-case tracking-normal text-slate-900 dark:text-white">
-                Years shipping production software
-              </span>
-              <span>Product-focused experience</span>
+          <div className="relative w-full">
+            <div className="pointer-events-none absolute inset-0 -z-10 rounded-[2.8rem] bg-gradient-to-r from-[#4C1D95]/25 via-[#7C3AED]/25 to-[#06B6D4]/25 blur-3xl dark:from-[#4C1D95]/45 dark:via-[#7C3AED]/40 dark:to-[#06B6D4]/45" />
+            <div className="rounded-[2.5rem] bg-gradient-to-r from-white via-indigo-50 to-cyan-50 p-[1.5px] shadow-[0_35px_90px_-45px_rgba(15,23,42,0.55)] dark:from-white/15 dark:via-[#4C1D95]/20 dark:to-[#06B6D4]/20">
+              <div className="flex w-full flex-col items-center gap-4 rounded-[2.35rem] border border-white/60 bg-white/85 px-6 py-4 text-center shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)] backdrop-blur-2xl dark:border-white/20 dark:bg-white/[0.08] dark:text-white sm:flex-row sm:items-center sm:justify-between sm:text-left">
+                <div className="text-5xl font-bold leading-none text-indigo-600 dark:text-white">
+                  6+
+                </div>
+                <div className="space-y-1 text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-white/60">
+                  <span className="block text-base font-semibold normal-case tracking-normal text-slate-900 dark:text-white">
+                    Years shipping production software
+                  </span>
+                  <span>Product-focused experience</span>
+                </div>
+              </div>
             </div>
           </div>
         </Reveal>

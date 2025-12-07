@@ -4,6 +4,16 @@ import type { MouseEvent } from "react";
 import Reveal from "@/components/Reveal";
 import { preventOrphans } from "@/lib/utils";
 
+const footerNavItems = [
+  { label: "About", target: "about" },
+  { label: "Experience", target: "experience" },
+  { label: "Projects", target: "projects" },
+  { label: "Skills", target: "skills" },
+  { label: "Process", target: "process" },
+  { label: "Testimonials", target: "testimonials" },
+  { label: "Contact", target: "contact" },
+];
+
 export default function FooterSection() {
   const handleSmoothScroll = (
     event: MouseEvent<HTMLAnchorElement>,
@@ -31,7 +41,7 @@ export default function FooterSection() {
                 {preventOrphans("Based in Dhaka · collaborating with teams worldwide")}
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-white/40">
+            <nav className="flex flex-col items-start gap-3 text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-white/40 sm:items-end">
               <a
                 href="#home"
                 onClick={(event) => handleSmoothScroll(event, "home")}
@@ -39,21 +49,19 @@ export default function FooterSection() {
               >
                 Back to top
               </a>
-              <a
-                href="#projects"
-                onClick={(event) => handleSmoothScroll(event, "projects")}
-                className="transition hover:text-slate-900 dark:hover:text-white"
-              >
-                Projects
-              </a>
-              <a
-                href="#contact"
-                onClick={(event) => handleSmoothScroll(event, "contact")}
-                className="transition hover:text-slate-900 dark:hover:text-white"
-              >
-                Contact
-              </a>
-            </div>
+              <div className="flex flex-wrap gap-x-4 gap-y-2 text-[0.7rem] tracking-[0.32em] sm:justify-end">
+                {footerNavItems.map((item) => (
+                  <a
+                    key={item.target}
+                    href={`#${item.target}`}
+                    onClick={(event) => handleSmoothScroll(event, item.target)}
+                    className="transition hover:text-slate-900 dark:hover:text-white"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </nav>
           </div>
           <div className="mt-6 text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-white/30">
             {preventOrphans("© 2025 Atik Mahbub. All rights reserved.")}

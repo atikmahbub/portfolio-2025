@@ -70,7 +70,8 @@ export default function Navbar() {
     const element = document.querySelector<HTMLElement>(href);
     if (element) {
       const headerOffset = 120; // keep section headings clear of the fixed nav
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = Math.max(elementPosition - headerOffset, 0);
 
       window.scrollTo({
@@ -83,7 +84,13 @@ export default function Navbar() {
 
   return (
     <header
-      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4"
+      className={clsx(
+        "pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-0 pb-2 transition-colors",
+        isOpen
+          ? "bg-white dark:bg-slate-950"
+          : "bg-white/80 dark:bg-slate-950/80",
+        "shadow-[0_20px_60px_-35px_rgba(15,23,42,0.55)] xl:bg-transparent xl:shadow-none"
+      )}
       role="navigation"
     >
       <div
@@ -136,7 +143,7 @@ export default function Navbar() {
                       className={clsx(
                         "rounded-full px-4 py-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:focus-visible:ring-white/60",
                         isActive
-                          ? "bg-slate-900 text-white shadow-[0_12px_30px_-20px_rgba(15,23,42,0.6)] dark:bg-white dark:text-slate-900"
+                          ? "bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-800 text-white shadow-[0_12px_30px_-20px_rgba(15,23,42,0.6)] dark:bg-slate-200/30 dark:text-white dark:from-transparent dark:via-transparent dark:to-transparent"
                           : "border border-transparent text-slate-600 hover:border-slate-400 hover:text-slate-900 dark:text-white/60 dark:hover:border-white/30 dark:hover:text-white"
                       )}
                       aria-current={isActive ? "page" : undefined}
@@ -153,7 +160,7 @@ export default function Navbar() {
       </div>
 
       {isOpen ? (
-        <div className="pointer-events-auto mt-[0rem] flex w-full justify-center px-0 xl:hidden">
+        <div className="pointer-events-auto mt-0 flex w-full justify-center rounded-[2.5rem] border border-slate-200/80 bg-white/95 px-4 py-4 shadow-[0_30px_80px_-45px_rgba(15,23,42,0.55)] dark:border-white/10 dark:bg-slate-950/95 xl:hidden">
           <div className="flex w-full flex-col gap-4">
             <div className="flex items-center justify-between rounded-full border border-slate-200/80 bg-white/80 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-white/60">
               <span className="inline-flex items-center gap-2 whitespace-nowrap">
@@ -185,7 +192,7 @@ export default function Navbar() {
                         className={clsx(
                           "w-full rounded-2xl px-4 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:focus-visible:ring-white/50",
                           isActive
-                            ? "bg-slate-900 text-white dark:bg-white/80 dark:text-slate-900"
+                            ? "bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-800 text-white dark:bg-slate-100/10 dark:text-white dark:from-transparent dark:via-transparent dark:to-transparent"
                             : "hover:bg-white/60 hover:text-slate-900 dark:hover:bg-white/5 dark:hover:text-white"
                         )}
                         aria-current={isActive ? "page" : undefined}
