@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Poppins, Inconsolata } from "next/font/google";
@@ -135,7 +136,9 @@ export default function RootLayout({
                 });
               `}
             </Script>
-            <Analytics />
+            <Suspense fallback={null}>
+              <Analytics />
+            </Suspense>
           </>
         )}
         <Script
