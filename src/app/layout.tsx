@@ -6,6 +6,8 @@ import DotGridBackground from "@/components/DotGridBackground";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/Providers";
 import ThemeScript from "@/components/ThemeScript";
+import Analytics from "@/components/Analytics";
+import { GA_MEASUREMENT_ID } from "@/constants/constants";
 
 const poppins = Poppins({
   variable: "--font-geist-sans",
@@ -99,6 +101,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const isGaEnabled =
+    process.env.NODE_ENV === "production" && Boolean(GA_MEASUREMENT_ID);
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -114,6 +119,25 @@ export default function RootLayout({
         className={`${poppins.variable} ${inconsolata.variable} min-h-screen antialiased transition-colors duration-500`}
       >
         <ThemeScript />
+        {isGaEnabled && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
+            <Analytics />
+          </>
+        )}
         <Script
           id="structured-data"
           type="application/ld+json"
