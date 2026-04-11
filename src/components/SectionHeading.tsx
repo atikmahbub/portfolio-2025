@@ -35,14 +35,17 @@ export default function SectionHeading({
             gsap.to(el, {
               opacity: 1,
               y: 0,
-              duration: 1,
+              duration: 0.8,
               ease: "power3.out",
             });
             observer.disconnect();
           }
         });
       },
-      { threshold: 0.2 }
+      { 
+        threshold: 0.05,
+        rootMargin: '0px 0px -50px 0px'
+      }
     );
 
     observer.observe(el);

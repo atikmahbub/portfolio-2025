@@ -158,10 +158,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     const proxSq = proximity * proximity;
 
     const draw = () => {
-      if (!isVisible) {
-        rafId = requestAnimationFrame(draw);
-        return;
-      }
+      if (!isVisible) return;
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
