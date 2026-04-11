@@ -223,7 +223,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   return (
     <div ref={wrapperRef} className={`sm-scope z-[999999] pointer-events-none fixed top-0 left-0 w-full h-screen`}>
       <div className="staggered-menu-wrapper relative w-full h-full" data-position={position}>
-        <div ref={preLayersRef} className="sm-prelayers absolute top-0 right-0 bottom-0 pointer-events-none z-[10000]">
+        <div ref={preLayersRef} className="sm-prelayers absolute top-0 right-0 bottom-0 pointer-events-none z-[100]">
           {(colors || ['#1e1e22', '#35353c']).slice(0, 3).map((c, i) => (
             <div 
               key={i} 
@@ -234,7 +234,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         </div>
 
         <header 
-          className={`sm-header fixed top-0 left-0 w-full flex items-center justify-between p-[1.5em] sm:p-[2em] z-[100] pointer-events-auto transition-all duration-500 ease-in-out ${isScrolled && !open ? 'shadow-[0_8px_30px_rgb(0,0,0,0.12)]' : ''}`}
+          className={`sm-header fixed top-0 left-0 w-full flex items-center justify-between p-[1.5em] sm:p-[2em] z-[300] pointer-events-auto transition-all duration-500 ease-in-out ${isScrolled && !open ? 'shadow-[0_8px_30px_rgb(0,0,0,0.12)]' : ''}`}
           style={{
             backgroundColor: (isScrolled && !open) ? navBgColor : 'transparent',
           }}
