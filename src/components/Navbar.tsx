@@ -90,7 +90,7 @@ export default function Navbar() {
         {" "}
         <nav
           className={clsx(
-            "flex w-full items-center justify-between gap-4 rounded-[1.75rem] border border-white/60 bg-white/20 px-6 py-3 text-sm text-slate-700 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6),0_20px_50px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 backdrop-blur-[35px] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_20px_50px_-10px_rgba(0,0,0,0.4)] dark:text-white/90",
+            "flex w-full items-center justify-between gap-4 rounded-[1.75rem] border border-white/60 bg-white/20 px-6 py-3 text-sm text-slate-700 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6),0_20px_50px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 backdrop-blur-md md:backdrop-blur-[35px] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_20px_50px_-10px_rgba(0,0,0,0.4)] dark:text-white/90",
             isScrolled ? "scale-[1.01]" : "",
             isOpen
               ? "opacity-0 pointer-events-none xl:opacity-100 xl:pointer-events-auto"
@@ -148,7 +148,7 @@ export default function Navbar() {
       </div>
 
       {isOpen ? (
-        <div className="pointer-events-auto mt-0 flex w-full justify-center rounded-[1.75rem] border border-white/60 bg-white/20 px-4 py-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_30px_80px_-45px_rgba(15,23,42,0.55)] backdrop-blur-[35px] dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_20px_50px_-10px_rgba(0,0,0,0.4)] xl:hidden">
+        <div className="pointer-events-auto mt-0 flex w-full justify-center rounded-[1.75rem] border border-white/60 bg-white/20 px-4 py-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_30px_80px_-45px_rgba(15,23,42,0.55)] backdrop-blur-md md:backdrop-blur-[35px] dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_20px_50px_-10px_rgba(0,0,0,0.4)] xl:hidden">
           <div className="flex w-full flex-col gap-4">
             <div className="flex items-center justify-between rounded-full border border-slate-200/80 bg-white/80 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-white/60">
               <span className="inline-flex items-center gap-2 whitespace-nowrap">

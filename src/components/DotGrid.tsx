@@ -85,6 +85,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     lastX: 0,
     lastY: 0
   });
+  const [isVisible, setIsVisible] = useState(true);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -121,7 +122,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     if (ctx) ctx.scale(dpr, dpr);
 
     // Increase gap on mobile to reduce dot count
-    const effectiveGap = isMobile ? gap * 1.5 : gap;
+    const effectiveGap = isMobile ? gap * 2.5 : gap;
     const cell = dotSize + effectiveGap;
 
     const cols = Math.floor((width + effectiveGap) / cell);
@@ -157,6 +158,10 @@ const DotGrid: React.FC<DotGridProps> = ({
     const proxSq = proximity * proximity;
 
     const draw = () => {
+      if (!isVisible) {
+        rafId = requestAnimationFrame(draw);
+        return;
+      }
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
@@ -200,7 +205,17 @@ const DotGrid: React.FC<DotGridProps> = ({
 
     draw();
     return () => cancelAnimationFrame(rafId);
-  }, [proximity, baseColor, activeRgb, baseRgb, circlePath, isMobile]);
+  }, [proximity, baseColor, activeRgb, baseRgb, circlePath, isMobile, isVisible]);
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    }, { threshold: 0.1 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     buildGrid();

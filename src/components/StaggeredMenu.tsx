@@ -63,6 +63,14 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const [textLines, setTextLines] = useState<string[]>(['Menu', 'Close']);
   const [showNavBg, setShowNavBg] = useState(true);
   const busyRef = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Initialize GSAP state on mount
   useEffect(() => {
@@ -209,7 +217,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
               radial-gradient(ellipse farthest-corner at 100% 0%, rgba(77, 25, 54, 0.6) 0%, rgba(77, 25, 54, 0) 45%),
               radial-gradient(ellipse farthest-corner at 0% 100%, rgba(77, 25, 54, 0.6) 0%, rgba(77, 25, 54, 0) 45%)
             `,
-            backgroundAttachment: 'fixed',
+            backgroundAttachment: isMobile ? 'scroll' : 'fixed',
             backgroundSize: 'cover'
           }}
         >

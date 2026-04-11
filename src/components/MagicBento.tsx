@@ -650,6 +650,16 @@ const MagicBento: React.FC<MagicBentoProps> = ({
             z-index: 1;
           }
           
+          @media (max-width: 768px) {
+            .card--border-glow::after {
+              display: none; /* Disable expensive radial gradient on mobile */
+            }
+            .card {
+               box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+               border-color: rgba(255,255,255,0.1) !important;
+            }
+          }
+          
           .card--border-glow:hover::after {
             opacity: 1;
           }
