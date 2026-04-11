@@ -171,14 +171,14 @@ export default function RootLayout({
           {JSON.stringify(structuredData)}
         </Script>
         <Providers>
-          <StaggeredMenu
+          {/* <StaggeredMenu
             isFixed
             items={menuItems}
             socialItems={socialItems}
             colors={['#7C3AED', '#6366F1', '#06B6D4']}
             accentColor="#6366F1"
             displayItemNumbering={false}
-          />
+          /> */}
           <div className="relative z-0 pt-20 sm:pt-24 overflow-x-hidden">{children}</div>
         </Providers>
       </body>
