@@ -37,7 +37,7 @@ export default function SectionHeading({
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.7, ease: [0.21, 1, 0.36, 1] }}
+        transition={{ duration: 0.7, ease: [0.21, 1, 0.36, 1] as const }}
         className="text-3xl font-semibold leading-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl"
       >
         {preventOrphans(title)}
