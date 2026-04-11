@@ -1,3 +1,4 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,301,701,300,501,401,901,400&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -324,7 +325,6 @@ html {
 
   * {
     @apply border-border outline-ring/50;
-    font-family: Satoshi, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
     box-sizing: border-box;
   }
 

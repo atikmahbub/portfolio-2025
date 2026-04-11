@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useEffect, useCallback, useMemo } from 'react';
+import React, { useRef, useEffect, useCallback, useMemo, useState } from 'react';
 import { gsap } from 'gsap';
 import { InertiaPlugin } from 'gsap/InertiaPlugin';
 
@@ -76,8 +76,8 @@ const DotGrid: React.FC<DotGridProps> = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dotsRef = useRef<Dot[]>([]);
   const pointerRef = useRef({
-    x: 0,
-    y: 0,
+    x: -1000,
+    y: -1000,
     vx: 0,
     vy: 0,
     speed: 0,
@@ -86,12 +86,20 @@ const DotGrid: React.FC<DotGridProps> = ({
     lastY: 0
   });
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const baseRgb = useMemo(() => hexToRgb(baseColor), [baseColor]);
   const activeRgb = useMemo(() => hexToRgb(activeColor), [activeColor]);
 
   const circlePath = useMemo(() => {
     if (typeof window === 'undefined' || !window.Path2D) return null;
-
     const p = new Path2D();
     p.arc(0, 0, dotSize / 2, 0, Math.PI * 2);
     return p;
@@ -112,12 +120,15 @@ const DotGrid: React.FC<DotGridProps> = ({
     const ctx = canvas.getContext('2d');
     if (ctx) ctx.scale(dpr, dpr);
 
-    const cols = Math.floor((width + gap) / (dotSize + gap));
-    const rows = Math.floor((height + gap) / (dotSize + gap));
-    const cell = dotSize + gap;
+    // Increase gap on mobile to reduce dot count
+    const effectiveGap = isMobile ? gap * 1.5 : gap;
+    const cell = dotSize + effectiveGap;
 
-    const gridW = cell * cols - gap;
-    const gridH = cell * rows - gap;
+    const cols = Math.floor((width + effectiveGap) / cell);
+    const rows = Math.floor((height + effectiveGap) / cell);
+
+    const gridW = cell * cols - effectiveGap;
+    const gridH = cell * rows - effectiveGap;
 
     const extraX = width - gridW;
     const extraY = height - gridH;
@@ -130,14 +141,14 @@ const DotGrid: React.FC<DotGridProps> = ({
       for (let x = 0; x < cols; x++) {
         const cx = startX + x * cell;
         const cy = startY + y * cell;
-        const scaleMod = 0.6 + Math.random() * 0.8; // Random scale between 0.6x and 1.4x
-        const opacityMod = 0.3 + Math.random() * 0.7; // Random opacity between 0.3 and 1.0
+        const scaleMod = 0.6 + Math.random() * 0.8;
+        const opacityMod = 0.3 + Math.random() * 0.7;
 
         dots.push({ cx, cy, xOffset: 0, yOffset: 0, _inertiaApplied: false, scaleMod, opacityMod });
       }
     }
     dotsRef.current = dots;
-  }, [dotSize, gap]);
+  }, [dotSize, gap, isMobile]);
 
   useEffect(() => {
     if (!circlePath) return;
@@ -153,22 +164,27 @@ const DotGrid: React.FC<DotGridProps> = ({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const { x: px, y: py } = pointerRef.current;
+      const hasPointer = px > -500;
 
       for (const dot of dotsRef.current) {
         const ox = dot.cx + dot.xOffset;
         const oy = dot.cy + dot.yOffset;
-        const dx = dot.cx - px;
-        const dy = dot.cy - py;
-        const dsq = dx * dx + dy * dy;
-
+        
         let style = `rgba(${baseRgb.r},${baseRgb.g},${baseRgb.b},${dot.opacityMod})`;
-        if (dsq <= proxSq) {
-          const dist = Math.sqrt(dsq);
-          const t = 1 - dist / proximity;
-          const r = Math.round(baseRgb.r + (activeRgb.r - baseRgb.r) * t);
-          const g = Math.round(baseRgb.g + (activeRgb.g - baseRgb.g) * t);
-          const b = Math.round(baseRgb.b + (activeRgb.b - baseRgb.b) * t);
-          style = `rgba(${r},${g},${b},${Math.min(1, dot.opacityMod + t)})`; // Brighten on proximity
+        
+        if (hasPointer && !isMobile) {
+          const dx = dot.cx - px;
+          const dy = dot.cy - py;
+          const dsq = dx * dx + dy * dy;
+
+          if (dsq <= proxSq) {
+            const dist = Math.sqrt(dsq);
+            const t = 1 - dist / proximity;
+            const r = Math.round(baseRgb.r + (activeRgb.r - baseRgb.r) * t);
+            const g = Math.round(baseRgb.g + (activeRgb.g - baseRgb.g) * t);
+            const b = Math.round(baseRgb.b + (activeRgb.b - baseRgb.b) * t);
+            style = `rgba(${r},${g},${b},${Math.min(1, dot.opacityMod + t)})`;
+          }
         }
 
         ctx.save();
@@ -184,18 +200,18 @@ const DotGrid: React.FC<DotGridProps> = ({
 
     draw();
     return () => cancelAnimationFrame(rafId);
-  }, [proximity, baseColor, activeRgb, baseRgb, circlePath]);
+  }, [proximity, baseColor, activeRgb, baseRgb, circlePath, isMobile]);
 
   useEffect(() => {
     buildGrid();
     let ro: ResizeObserver | null = null;
-    if ('ResizeObserver' in window) {
+    if (typeof window !== 'undefined' && 'ResizeObserver' in window) {
       ro = new ResizeObserver(buildGrid);
       if (wrapperRef.current) {
         ro.observe(wrapperRef.current);
       }
     } else {
-      (window as Window).addEventListener('resize', buildGrid);
+      window.addEventListener('resize', buildGrid);
     }
     return () => {
       if (ro) ro.disconnect();
@@ -204,6 +220,8 @@ const DotGrid: React.FC<DotGridProps> = ({
   }, [buildGrid]);
 
   useEffect(() => {
+    if (isMobile) return; // Disable hover effects on mobile
+
     const onMove = (e: MouseEvent) => {
       const now = performance.now();
       const pr = pointerRef.current;
@@ -281,15 +299,15 @@ const DotGrid: React.FC<DotGridProps> = ({
       }
     };
 
-    const throttledMove = throttle(onMove, 50);
+    const throttledMove = throttle(onMove, 32);
     window.addEventListener('mousemove', throttledMove, { passive: true });
-    window.addEventListener('click', onClick);
+    window.addEventListener('click', onClick, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', throttledMove);
       window.removeEventListener('click', onClick);
     };
-  }, [maxSpeed, speedTrigger, proximity, resistance, returnDuration, shockRadius, shockStrength]);
+  }, [maxSpeed, speedTrigger, proximity, resistance, returnDuration, shockRadius, shockStrength, isMobile]);
 
   const baseClasses = fillContainer
     ? 'relative h-full w-full'
