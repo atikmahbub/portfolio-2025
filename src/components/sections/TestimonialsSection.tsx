@@ -7,8 +7,11 @@ const testimonials = [
     icon: "💼",
     person: "Lucas Novak — CTO",
     role: "Engineering Leader & Startup Founder",
-    quote:
-      "“I’ve had the pleasure of working with Atik as his engineering manager. Atik is hardworking, communicative, and I could always trust his work. I enjoyed working with him so much that I asked him to consult as a FE engineer for my startup.”",
+    quote: (
+      <>
+        “I’ve had the pleasure of working with Atik as his engineering manager. Atik is <strong className="text-slate-900 dark:text-white font-semibold">hardworking, communicative</strong>, and I could <strong className="text-slate-900 dark:text-white font-semibold">always trust his work</strong>. I enjoyed working with him so much that I asked him to consult as a FE engineer for my startup.”
+      </>
+    ),
     attribution: "— Lucas Novak, CTO",
     rating: 5,
     project: "Enterprise dashboard & design system",
@@ -17,8 +20,11 @@ const testimonials = [
     icon: "👨‍💻",
     person: "Md Masud Rana — Full-Stack Developer",
     role: "Engineering Partner",
-    quote:
-      "“I had the opportunity to work alongside Atik, and he truly stands out as a talented engineer. He has a sharp eye for performance and detail, always striving to deliver clean, efficient solutions. Beyond his technical skills, he’s dependable, easy to work with, and brings a thoughtful approach to every project. Atik also has a positive, can-do attitude that makes working with him a great experience. He’s the kind of teammate you can count on in high-pressure situations and he always brings value to the team.”",
+    quote: (
+      <>
+        “I had the opportunity to work alongside Atik, and he truly stands out as a talented engineer. He has a <strong className="text-slate-900 dark:text-white font-semibold">sharp eye for performance and detail</strong>, always striving to deliver <strong className="text-slate-900 dark:text-white font-semibold">clean, efficient solutions</strong>. Beyond his technical skills, he’s dependable, easy to work with, and brings a thoughtful approach. He’s the kind of teammate you can count on in high-pressure situations.”
+      </>
+    ),
     attribution: "— Md Masud Rana, Full-Stack Developer",
     rating: 5,
     project: "Web3 loyalty platform",
@@ -27,8 +33,11 @@ const testimonials = [
     icon: "🌍",
     person: "Freelance Client — CEO",
     role: "Product Founder",
-    quote:
-      "“Atik delivered good work on this React.js development project and I enjoyed working with him. His communication and coding skills were excellent, he met all deadlines, and his skills were reasonably strong.”",
+    quote: (
+      <>
+        “Atik delivered excellent work on this React.js development project. His <strong className="text-slate-900 dark:text-white font-semibold">communication and coding skills were exceptional</strong>, he <strong className="text-slate-900 dark:text-white font-semibold">met all deadlines</strong>, and his engineering fundamentals are highly reliable.”
+      </>
+    ),
     attribution: "— Client Feedback",
     rating: 5,
     project: "React.js acceleration engagement",
@@ -43,12 +52,12 @@ const testimonialSignals = [
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="relative px-6 py-12 sm:py-20">
+    <section id="testimonials" className="relative px-6 py-10 sm:py-16">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <SectionHeading
-          eyebrow="Testimonials"
-          title="Let partners tell the story of working with you."
-          description="Notes from people I've worked with—covering trust, speed, and teamwork."
+          eyebrow="Credibility"
+          title="Trusted by engineering leaders and founders."
+          description="I build long-term relationships by delivering consistent, high-quality engineering."
         />
 
         <div className="grid gap-4 rounded-3xl border border-slate-200/70 bg-white/70 p-6 text-sm text-slate-600 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white/70 sm:grid-cols-3">
@@ -77,7 +86,7 @@ export default function TestimonialsSection() {
                   </div>
                 ) : null}
                 <blockquote className="text-sm text-slate-600 sm:text-base dark:text-white/80">
-                  {preventOrphans(testimonial.quote)}
+                  {testimonial.quote}
                 </blockquote>
                 <figcaption className="mt-auto">
                   <p className="text-sm font-semibold text-slate-900 dark:text-white">

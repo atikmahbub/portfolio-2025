@@ -45,7 +45,7 @@ export default function HeroSection() {
       id="home"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative flex items-center justify-center px-4 sm:px-6 pb-12 pt-4 lg:pt-8"
+      className="relative flex items-center justify-center px-4 sm:px-6 pb-8 pt-4 lg:pt-8"
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 lg:flex-row lg:items-center lg:justify-between relative z-10">
         
@@ -54,7 +54,7 @@ export default function HeroSection() {
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
             <span className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-700 dark:text-white/90">
               <span className="inline-flex h-1.5 w-1.5 rounded-full bg-indigo-500 dark:bg-fuchsia-400 shadow-[0_0_8px_rgba(217,70,239,0.8)]" />
-              Software Engineer
+              Product-Minded Engineer
             </span>
             <span className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-700 dark:text-[#D1FAE5]">
               <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400 dark:bg-[#10B981] shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
@@ -64,25 +64,53 @@ export default function HeroSection() {
 
           <motion.div {...fadeInUp} className="flex flex-col gap-3 relative">
             <div className="absolute -inset-10 bg-indigo-200/20 via-cyan-100/10 to-transparent dark:bg-fuchsia-500/5 blur-[80px] -z-10" />
-            <h1 className="text-5xl font-light leading-[1.1] text-slate-900 dark:text-white sm:text-6xl lg:text-7xl">
-              <span className="block font-semibold tracking-wide">BUILDING</span>
-              <span className="block text-slate-500 dark:text-white/60">future-proof products</span>
+            <h1 className="text-4xl font-semibold leading-[1.15] text-slate-900 dark:text-white sm:text-5xl lg:text-[3.5rem] tracking-tight">
+              <span className="block">I build scalable platforms</span>
+              <span className="block text-slate-500 dark:text-white/60 mt-1 sm:mt-2">for high-growth product teams.</span>
             </h1>
           </motion.div>
 
-          <p className="max-w-xl text-lg leading-relaxed text-[#050816] dark:text-white/70 sm:text-xl">
+          <p className="max-w-xl text-lg leading-relaxed text-[#050816] dark:text-white/80 sm:text-xl font-medium">
             {preventOrphans(
-              "Hey 👋 I'm Atik. For the past 6+ years I've been helping teams ship stable web apps, design systems, and AI/Web3 features. I enjoy taking messy ideas, sorting them out with product and design, and then building calm, production-ready solutions."
+              "I turn messy product ideas into stable, scalable systems teams can trust."
             )}
           </p>
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-indigo-600 dark:text-indigo-400 opacity-80 -mt-2">
+            Product-focused engineer who builds reliable systems that scale
+          </p>
 
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-5 pt-2">
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
             <a
               href="#projects"
+              className="inline-flex items-center gap-3 rounded-full bg-indigo-600 px-8 py-3.5 text-[11px] font-extrabold uppercase tracking-[0.2em] text-white transition-all hover:bg-indigo-700 dark:bg-indigo-500 dark:text-white dark:hover:bg-indigo-400 shadow-[0_0_20px_rgba(79,70,229,0.4)] dark:shadow-[0_0_20px_rgba(99,102,241,0.5)]"
+            >
+              View Projects <ArrowRight className="h-4 w-4" />
+            </a>
+            <a
+              href="#contact"
               className="glass-panel-deep inline-flex items-center gap-3 rounded-full px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-800 dark:text-white transition-all hover:bg-slate-100 dark:hover:bg-white/5 shadow-xl"
             >
-              Explore Work <ArrowRight className="h-4 w-4" />
+              Book a Call
             </a>
+          </div>
+
+          <div className="mt-4 grid gap-3 border-l-2 border-indigo-500/30 pl-4 py-1 text-left w-full">
+            <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-white/80 font-medium">
+              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 shrink-0" />
+              <span>Turn unclear product ideas into structured engineering plans</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-white/80 font-medium">
+              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 shrink-0" />
+              <span>Ship fast without breaking production</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-white/80 font-medium">
+              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 shrink-0" />
+              <span>Build systems that scale with real users</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-white/80 font-medium">
+              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 shrink-0" />
+              <span>Improve developer experience for faster teams</span>
+            </div>
           </div>
 
           <div className="mt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 border-t border-slate-200/50 pt-6 dark:border-white/10 w-full">

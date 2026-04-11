@@ -46,32 +46,32 @@ const availability = [
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="relative px-6 py-12 sm:py-20">
+    <section id="contact" className="relative px-6 py-10 sm:py-16">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <SectionHeading
           eyebrow="Connect"
-          title="Let’s explore the right fit for your vision."
-          description="I’m open to teaming up with startups, product groups, and founders to ship web, AI, or Web3 work."
+          title="Ready to build a reliable system that scales?"
+          description="Product-focused engineer who builds reliable systems that scale."
           align="center"
         />
         <div className="grid gap-6 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
           <Reveal>
             <div className="glow-card flex h-full flex-col gap-6 p-8 text-slate-700 transition-colors hover:text-slate-900 dark:text-white/75 dark:hover:text-white">
-              <span className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200/70 bg-white/80 px-4 py-1 text-xs font-medium uppercase tracking-[0.3em] text-slate-600 shadow-sm dark:border-white/20 dark:bg-white/5 dark:text-white/60">
-                Open for Collaborations
+              <span className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200/70 bg-white/80 px-4 py-1 text-xs font-medium uppercase tracking-[0.3em] text-slate-600 shadow-sm dark:border-white/20 dark:bg-white/5 dark:text-green-400">
+                <span className="h-2 w-2 rounded-full bg-green-500 animate-[pulse_2s_ease-in-out_infinite]" /> Available for Full-Time / Freelance
               </span>
               <div className="space-y-4">
-                <h3 className="text-3xl font-semibold text-slate-900 dark:text-white sm:text-4xl">
-                  {preventOrphans("Let’s explore the right fit for your vision.")}
+               <h3 className="text-3xl font-semibold text-slate-900 dark:text-white sm:text-4xl">
+                  {preventOrphans("Ready to engineer your next big launch?")}
                 </h3>
                 <p className="text-sm text-slate-600 sm:text-base dark:text-white/65">
                   {preventOrphans(
-                    "Need help shaping a product idea, polishing a feature, or rolling out an AI/Web3 workflow? I'm happy to jump in.",
+                    "Whether you need to scale an existing platform, rescue a complex codebase, or build a scalable MVP from scratch, I'm ready to bring predictable engineering delivery to your team.",
                   )}
                 </p>
-                <p className="text-sm text-slate-600 sm:text-base dark:text-white/65">
+                <p className="text-sm font-medium text-slate-800 sm:text-base dark:text-white/80">
                   {preventOrphans(
-                    "If you're looking for someone who can plan, build, and keep things steady after launch, let's chat. I typically reply within the hour.",
+                    "Expect a reply within 1-2 hours—let's make contacting easy and fast.",
                   )}
                 </p>
               </div>
@@ -87,13 +87,23 @@ export default function ContactSection() {
                   </div>
                 ))}
               </div>
-              <a
-                href="mailto:atikmahbub100@gmail.com"
-                className="inline-flex w-fit items-center gap-3 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
-              >
-                Start Conversation
-                <MessageSquareText className="h-4 w-4" />
-              </a>
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <a
+                  href="mailto:atikmahbub100@gmail.com"
+                  className="inline-flex items-center gap-3 rounded-full bg-slate-900 px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 shadow-[0_0_20px_rgba(30,41,59,0.3)] dark:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                >
+                  Start a Project
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://calendly.com/atikmahbub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass-panel-deep inline-flex items-center gap-3 rounded-full px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-800 dark:text-white transition-all hover:bg-slate-100 dark:hover:bg-white/5 shadow-xl"
+                >
+                  Book a Call
+                </a>
+              </div>
             </div>
           </Reveal>
 

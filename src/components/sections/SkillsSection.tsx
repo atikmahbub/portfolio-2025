@@ -5,58 +5,49 @@ import { preventOrphans } from "@/lib/utils";
 
 const skillBuckets = [
   {
-    title: "Product-Led Craft",
+    title: "Frontend & Product Craft",
     description:
-      "Tie architecture, UX, and roadmap goals together so launches feel smooth.",
-    spotlight: "From kickoff chats to QA sign-off.",
+      "Bridging the gap between design and high-performance user interfaces.",
+    spotlight: "Building UIs that feel instantly responsive.",
     items: [
-      "UX Collaboration",
-      "Roadmap Co-Creation",
-      "Design Systems",
-      "Analytics & Feedback Loops",
-      "AI-Driven Product Thinking",
-      "Web3-Integrated Experiences",
+      "Deliver pixel-perfect, responsive UX",
+      "Architect scalable, reusable design systems",
+      "Optimize frontend performance at scale",
+      "Integrate AI & Web3 features seamlessly",
+      "Translate roadmaps into clear tech plans",
     ],
   },
   {
-    title: "Engineering Stack",
+    title: "Backend & Systems Architecture",
     description:
-      "Tools I lean on to build modern, scalable systems.",
-    spotlight: "TypeScript across web, mobile, and services.",
+      "Engineering robust foundations that handle real-world traffic reliably.",
+    spotlight: "Strict TypeScript and scalable data layers.",
     items: [
-      "TypeScript",
-      "React",
-      "React Native",
-      "Next.js",
-      "Node & Edge APIs",
-      "Express.js",
-      "PostgreSQL / Prisma",
-      "Tailwind CSS",
-      "tRPC",
-      "AI & Agentic Systems",
-      "Web3 / Solidity",
+      "Design APIs that scale under load",
+      "Enforce strict TypeScript data contracts",
+      "Model robust relational database schemas",
+      "Build type-safe, resilient microservices",
+      "Develop secure, production-ready smart contracts",
     ],
   },
   {
-    title: "Ways of Working",
+    title: "Engineering Operations",
     description:
-      "Simple habits that keep remote teams aligned from start to finish.",
-    spotlight: "Remote rituals that keep everyone in sync.",
+      "Turning unpredictable development into a predictable, calm machine.",
+    spotlight: "From local commit to production deployment.",
     items: [
-      "Technical Leadership",
-      "Mentorship",
-      "CI/CD Pipelines",
-      "Observability & Telemetry",
-      "Performance Budgets",
-      "Documentation & Standards",
-      "AI + Web3 Governance",
+      "Automate CI/CD for zero-downtime deployments",
+      "Implement production-ready telemetry & logging",
+      "Mentor teams on scalable engineering habits",
+      "Establish standards that prevent regressions",
+      "Write documentation that drives team adoption",
     ],
   },
 ];
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="relative px-6 py-12 sm:py-20">
+    <section id="skills" className="relative px-6 py-10 sm:py-16">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <SectionHeading
           eyebrow="Capabilities"
@@ -66,23 +57,21 @@ export default function SkillsSection() {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {skillBuckets.map((bucket) => (
-            <div key={bucket.title} className="glow-card flex h-full flex-col gap-4 p-6 text-slate-700 transition-colors hover:text-slate-900 dark:text-white/75 dark:hover:text-white">
-              <div className="space-y-2">
-                <span className="text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-white/40">
-                  Discipline
-                </span>
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                  {preventOrphans(bucket.title)}
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-white/65">
-                  {preventOrphans(bucket.description)}
+            <div key={bucket.title} className="glow-card flex h-full flex-col gap-5 p-7 text-slate-700 transition-all duration-300 hover:text-slate-900 dark:text-white/70 dark:hover:text-white opacity-85 hover:opacity-100">
+              <span className="self-start rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-slate-500 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white/40">
+                {bucket.title}
+              </span>
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
+                {preventOrphans(bucket.title)}
+              </h3>
+              <p className="text-sm text-slate-600 dark:text-white/65">
+                {preventOrphans(bucket.description)}
+              </p>
+              {bucket.spotlight && (
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-indigo-500/80 dark:text-indigo-400/60">
+                  {preventOrphans(bucket.spotlight)}
                 </p>
-                {bucket.spotlight ? (
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 dark:text-white/50">
-                    {preventOrphans(bucket.spotlight)}
-                  </p>
-                ) : null}
-              </div>
+              )}
               <ul className="mt-auto space-y-3 text-sm">
                 {bucket.items.map((item) => (
                   <li key={item} className="flex items-center gap-3">

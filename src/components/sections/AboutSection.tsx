@@ -50,29 +50,29 @@ const principles = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative px-6 py-12 sm:py-20">
+    <section id="about" className="relative px-6 py-10 sm:py-16">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <SectionHeading
           eyebrow="About"
           title="Shaping polished experiences with technical empathy."
-          description="Full-stack engineer who mixes product sense with reliable code and kind communication."
+          description="Product-focused engineer who builds reliable systems that scale."
         />
 
         <div className="grid gap-12 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
           <div className="flex flex-col gap-8 text-base text-slate-600 sm:text-lg dark:text-white/70">
             <p>
               {preventOrphans(
-                "I like taking messy product ideas and turning them into simple, sturdy shipping plans. The goal is always the same: move fast without leaving a trail of stress behind.",
+                "Product development is often messy. Requirements shift, edge cases emerge, and deadlines loom. I step into this ambiguity and transform it into predictable, engineered delivery.",
               )}
             </p>
             <p>
               {preventOrphans(
-                "Across 6+ years I've paired with founders, designers, and engineers to build web apps, systems, and design libraries. Clean code, good docs, and honest check-ins help everyone stay in sync.",
+                "Over the past 6+ years, I've partnered with cross-functional teams to rescue struggling codebases, architect scalable web platforms from scratch, and establish robust standards that prevent production fires before they happen.",
               )}
             </p>
             <p>
               {preventOrphans(
-                "I thrive where product thinking and engineering depth meet—keeping teams confident while features make their way to production.",
+                "My focus is never just writing code—it's building the right features efficiently, shipping them reliably, and ensuring the product scales calmly so the team can sleep well at night.",
               )}
             </p>
           </div>

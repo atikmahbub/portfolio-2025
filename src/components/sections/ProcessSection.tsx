@@ -4,19 +4,19 @@ import { preventOrphans } from "@/lib/utils";
 
 const phases = [
   {
-    stage: "01 — Discover",
-    title: "Align on the next best move.",
-    copy: "Audit the current state, ask blunt questions, and agree on what success looks like before writing code.",
+    stage: "01 — Discover & De-risk",
+    title: "Map the unknown before building.",
+    copy: "Audit existing systems, define scope rigidly, and identify technical risks to ensure predictable timelines.",
   },
   {
-    stage: "02 — Design",
-    title: "Prototype, validate, and architect.",
-    copy: "Prototype just enough, pick the right tools, and draft contracts so everyone knows how the system will work.",
+    stage: "02 — Architect & Align",
+    title: "Design for scale and clarity.",
+    copy: "Draft APIs, establish data contracts, and align the team on a resilient, scalable architecture.",
   },
   {
-    stage: "03 — Deliver",
-    title: "Ship with confidence, iterate with data.",
-    copy: "Build carefully, lean on CI + telemetry, launch, and adjust using real-world signals.",
+    stage: "03 — Execute & Operate",
+    title: "Ship reliably, monitor constantly.",
+    copy: "Execute with automated testing, robust CI/CD, and strict telemetry. Launching shouldn't be stressful.",
   },
 ];
 
@@ -40,12 +40,12 @@ const processSignals = [
 
 export default function ProcessSection() {
   return (
-    <section id="process" className="relative px-6 py-12 sm:py-20">
+    <section id="process" className="relative px-6 py-10 sm:py-16">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <SectionHeading
-          eyebrow="Process"
-          title="A repeatable cadence for shipping meaningful work."
-          description="A simple loop I lean on to understand problems, prototype, and ship with confidence."
+          eyebrow="Process & Delivery"
+          title="Predictable execution, zero surprises."
+          description="A structured engineering cadence designed to reduce risk, maintain momentum, and ship reliable software."
           align="center"
         />
 
@@ -63,7 +63,7 @@ export default function ProcessSection() {
                   {preventOrphans(phase.copy)}
                 </p>
                 <span className="text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-white/50">
-                  Outcome: predictable greenlights
+                  Outcome: Reduced technical risk
                 </span>
               </div>
             </Reveal>
