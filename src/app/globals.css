@@ -151,10 +151,9 @@
     will-change: auto !important;
   }
 
-  /* Optimize section rendering */
+  /* Optimize section rendering - removed content-visibility as it delays IntersectionObservers */
   section {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 500px;
+    contain: paint;
   }
 
   .glass-panel-deep {

@@ -27,29 +27,35 @@ export default function SectionHeading({
     const el = titleRef.current;
     if (!el) return;
 
-    gsap.set(el, { opacity: 0, y: 24 });
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            gsap.to(el, {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease: "power3.out",
-            });
-            observer.disconnect();
-          }
-        });
-      },
-      { 
-        threshold: 0.05,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    );
+    const ctx = gsap.context(() => {
+      gsap.set(el, { opacity: 0, y: 24, visibility: 'hidden' });
 
-    observer.observe(el);
-    return () => observer.disconnect();
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              gsap.to(el, {
+                opacity: 1,
+                y: 0,
+                visibility: 'visible',
+                duration: 0.6,
+                ease: "power2.out",
+              });
+              observer.disconnect();
+            }
+          });
+        },
+        { 
+          threshold: 0.01,
+          rootMargin: '100px 0px 100px 0px'
+        }
+      );
+
+      observer.observe(el);
+      return () => observer.disconnect();
+    }, titleRef);
+
+    return () => ctx.revert();
   }, []);
 
   const alignmentClasses =
