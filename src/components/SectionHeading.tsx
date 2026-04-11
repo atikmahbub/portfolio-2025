@@ -21,43 +21,6 @@ export default function SectionHeading({
   align = "left",
   className = "",
 }: SectionHeadingProps) {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    const el = titleRef.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      gsap.set(el, { opacity: 0, y: 24, visibility: 'hidden' });
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              gsap.to(el, {
-                opacity: 1,
-                y: 0,
-                visibility: 'visible',
-                duration: 0.6,
-                ease: "power2.out",
-              });
-              observer.disconnect();
-            }
-          });
-        },
-        { 
-          threshold: 0.01,
-          rootMargin: '100px 0px 100px 0px'
-        }
-      );
-
-      observer.observe(el);
-      return () => observer.disconnect();
-    }, titleRef);
-
-    return () => ctx.revert();
-  }, []);
-
   const alignmentClasses =
     align === "center"
       ? "items-center text-center"
@@ -71,7 +34,6 @@ export default function SectionHeading({
         </span>
       ) : null}
       <h2
-        ref={titleRef}
         className="text-3xl font-semibold leading-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl"
       >
         {preventOrphans(title)}
