@@ -11,7 +11,7 @@ export default function DotGridBackground() {
   const activeColor = isDark ? "#22d3ee" : "#4f46e5"; // Cyan glow on hover
 
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background bg-dark-orbital">
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       {/* Mid Layer: Soft volumetric light diffusion for depth illusion */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/10 dark:bg-fuchsia-500/5 blur-[120px]" />
       <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] translate-x-1/2 translate-y-1/2 rounded-full bg-cyan-500/10 dark:bg-indigo-500/5 blur-[150px]" />

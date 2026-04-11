@@ -145,20 +145,28 @@
 
   .glass-panel,
   .glow-card {
-    backdrop-filter: blur(6px) saturate(100%);
-    -webkit-backdrop-filter: blur(6px) saturate(100%);
-    /* Disable will-change on mobile to save GPU memory */
+    /* Completely disable backdrop-filter on mobile to fix Safari rendering holes */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    
+    /* Increase opacity to compensate for lack of blur */
+    background: rgba(25, 16, 79, 0.85) !important;
+    
+    /* Disable will-change and forced GPU layers on mobile to save memory */
     will-change: auto !important;
+    transform: none !important;
   }
 
-  /* Optimize section rendering - removed content-visibility as it delays IntersectionObservers */
+  /* Optimize section rendering */
   section {
     contain: paint;
+    isolation: isolate; /* Create new stacking context */
   }
 
   .glass-panel-deep {
-    backdrop-filter: blur(10px) saturate(110%);
-    -webkit-backdrop-filter: blur(10px) saturate(110%);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(25, 16, 79, 0.95) !important;
   }
 
   /* Disable expensive hover-only decorations on mobile */
