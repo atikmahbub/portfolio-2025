@@ -12,7 +12,7 @@ const fadeInUp = {
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-50px" },
   transition: { duration: 0.7, ease: [0.21, 1, 0.36, 1] }
-};
+} as const;
 
 export default function HeroSection() {
   const [copiedEmail, setCopiedEmail] = useState(false);

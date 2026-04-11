@@ -28,7 +28,7 @@ export default function Reveal({
       transition={{
         duration,
         delay,
-        ease: [0.21, 1, 0.36, 1], // Professional cubic-bezier ease
+        ease: [0.21, 1, 0.36, 1] as const, // Professional cubic-bezier ease
       }}
       className={className}
     >
