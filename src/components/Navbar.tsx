@@ -66,19 +66,7 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  const handleNavClick = (href: string) => {
-    const element = document.querySelector<HTMLElement>(href);
-    if (element) {
-      const headerOffset = 120; // keep section headings clear of the fixed nav
-      const elementPosition =
-        element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = Math.max(elementPosition - headerOffset, 0);
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
+  const handleNavClick = () => {
     setIsOpen(false);
   };
 
@@ -87,8 +75,8 @@ export default function Navbar() {
       className={clsx(
         "pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-0 pb-2 transition-colors",
         isOpen
-          ? "bg-white dark:bg-slate-950"
-          : "bg-white/80 dark:bg-slate-950/80",
+          ? "bg-white dark:bg-[#19104F]"
+          : "bg-white/80 dark:bg-[#19104F]/80",
         "shadow-[0_20px_60px_-35px_rgba(15,23,42,0.55)] xl:bg-transparent xl:shadow-none"
       )}
       role="navigation"
@@ -102,7 +90,7 @@ export default function Navbar() {
         {" "}
         <nav
           className={clsx(
-            "flex w-full items-center justify-between gap-4 rounded-[3rem] border border-white/60 bg-white/70 px-6 py-3 text-sm text-slate-700 shadow-[0_30px_80px_-45px_rgba(15,23,42,0.45)] transition-all duration-500 backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/70 dark:text-white/80",
+            "flex w-full items-center justify-between gap-4 rounded-[1.75rem] border border-white/60 bg-white/20 px-6 py-3 text-sm text-slate-700 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6),0_20px_50px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 backdrop-blur-[35px] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_20px_50px_-10px_rgba(0,0,0,0.4)] dark:text-white/90",
             isScrolled ? "scale-[1.01]" : "",
             isOpen
               ? "opacity-0 pointer-events-none xl:opacity-100 xl:pointer-events-auto"
@@ -137,9 +125,9 @@ export default function Navbar() {
                 const isActive = activeSection === item.href;
                 return (
                   <li key={item.href}>
-                    <button
-                      type="button"
-                      onClick={() => handleNavClick(item.href)}
+                    <a
+                      href={item.href}
+                      onClick={handleNavClick}
                       className={clsx(
                         "rounded-full px-4 py-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:focus-visible:ring-white/60",
                         isActive
@@ -149,7 +137,7 @@ export default function Navbar() {
                       aria-current={isActive ? "page" : undefined}
                     >
                       {item.label}
-                    </button>
+                    </a>
                   </li>
                 );
               })}
@@ -160,7 +148,7 @@ export default function Navbar() {
       </div>
 
       {isOpen ? (
-        <div className="pointer-events-auto mt-0 flex w-full justify-center rounded-[2.5rem] border border-slate-200/80 bg-white/95 px-4 py-4 shadow-[0_30px_80px_-45px_rgba(15,23,42,0.55)] dark:border-white/10 dark:bg-slate-950/95 xl:hidden">
+        <div className="pointer-events-auto mt-0 flex w-full justify-center rounded-[1.75rem] border border-white/60 bg-white/20 px-4 py-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_30px_80px_-45px_rgba(15,23,42,0.55)] backdrop-blur-[35px] dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_20px_50px_-10px_rgba(0,0,0,0.4)] xl:hidden">
           <div className="flex w-full flex-col gap-4">
             <div className="flex items-center justify-between rounded-full border border-slate-200/80 bg-white/80 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-white/60">
               <span className="inline-flex items-center gap-2 whitespace-nowrap">
@@ -186,11 +174,11 @@ export default function Navbar() {
                   const isActive = activeSection === item.href;
                   return (
                     <li key={item.href}>
-                      <button
-                        type="button"
-                        onClick={() => handleNavClick(item.href)}
+                      <a
+                        href={item.href}
+                        onClick={handleNavClick}
                         className={clsx(
-                          "w-full rounded-2xl px-4 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:focus-visible:ring-white/50",
+                          "block w-full rounded-2xl px-4 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:focus-visible:ring-white/50",
                           isActive
                             ? "bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-800 text-white dark:bg-slate-100/10 dark:text-white dark:from-transparent dark:via-transparent dark:to-transparent"
                             : "hover:bg-white/60 hover:text-slate-900 dark:hover:bg-white/5 dark:hover:text-white"
@@ -198,7 +186,7 @@ export default function Navbar() {
                         aria-current={isActive ? "page" : undefined}
                       >
                         {item.label}
-                      </button>
+                      </a>
                     </li>
                   );
                 })}

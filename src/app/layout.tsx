@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Poppins, Inconsolata } from "next/font/google";
+import { Inconsolata } from "next/font/google";
 import "./globals.css";
 import DotGridBackground from "@/components/DotGridBackground";
 import Navbar from "@/components/Navbar";
@@ -10,11 +10,7 @@ import ThemeScript from "@/components/ThemeScript";
 import Analytics from "@/components/Analytics";
 import { GA_MEASUREMENT_ID } from "@/constants/constants";
 
-const poppins = Poppins({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+// Poppins removed in favor of Satoshi in globals.css
 
 const inconsolata = Inconsolata({
   variable: "--font-geist-mono",
@@ -108,6 +104,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@1,2&display=swap"
+          rel="stylesheet"
+          crossOrigin="anonymous"
+        />
         {/* Google Search Console verification for Netlify site */}
         <meta
           name="google-site-verification"
@@ -117,7 +118,7 @@ export default function RootLayout({
       </head>
 
       <body
-        className={`${poppins.variable} ${inconsolata.variable} min-h-screen antialiased transition-colors duration-500`}
+        className={`font-sans ${inconsolata.variable} min-h-screen antialiased transition-colors duration-500`}
       >
         <ThemeScript />
         {isGaEnabled && (

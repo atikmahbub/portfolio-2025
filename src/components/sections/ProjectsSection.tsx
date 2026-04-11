@@ -142,7 +142,7 @@ export default function ProjectsSection() {
             {projectMetrics.map((metric) => (
               <div
                 key={metric.label}
-                className="rounded-3xl border border-slate-200/70 bg-white/70 px-5 py-4 text-left text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-white/70"
+                className="glow-card px-5 py-4 text-left text-slate-600 transition-colors hover:text-slate-900 dark:text-white/70 dark:hover:text-white"
               >
                 <p className="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/40">
                   {metric.label}

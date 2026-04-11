@@ -25,6 +25,8 @@ interface Dot {
   xOffset: number;
   yOffset: number;
   _inertiaApplied: boolean;
+  scaleMod: number;
+  opacityMod: number;
 }
 
 export interface DotGridProps {
@@ -128,7 +130,10 @@ const DotGrid: React.FC<DotGridProps> = ({
       for (let x = 0; x < cols; x++) {
         const cx = startX + x * cell;
         const cy = startY + y * cell;
-        dots.push({ cx, cy, xOffset: 0, yOffset: 0, _inertiaApplied: false });
+        const scaleMod = 0.6 + Math.random() * 0.8; // Random scale between 0.6x and 1.4x
+        const opacityMod = 0.3 + Math.random() * 0.7; // Random opacity between 0.3 and 1.0
+
+        dots.push({ cx, cy, xOffset: 0, yOffset: 0, _inertiaApplied: false, scaleMod, opacityMod });
       }
     }
     dotsRef.current = dots;
@@ -156,18 +161,19 @@ const DotGrid: React.FC<DotGridProps> = ({
         const dy = dot.cy - py;
         const dsq = dx * dx + dy * dy;
 
-        let style = baseColor;
+        let style = `rgba(${baseRgb.r},${baseRgb.g},${baseRgb.b},${dot.opacityMod})`;
         if (dsq <= proxSq) {
           const dist = Math.sqrt(dsq);
           const t = 1 - dist / proximity;
           const r = Math.round(baseRgb.r + (activeRgb.r - baseRgb.r) * t);
           const g = Math.round(baseRgb.g + (activeRgb.g - baseRgb.g) * t);
           const b = Math.round(baseRgb.b + (activeRgb.b - baseRgb.b) * t);
-          style = `rgb(${r},${g},${b})`;
+          style = `rgba(${r},${g},${b},${Math.min(1, dot.opacityMod + t)})`; // Brighten on proximity
         }
 
         ctx.save();
         ctx.translate(ox, oy);
+        ctx.scale(dot.scaleMod, dot.scaleMod);
         ctx.fillStyle = style;
         ctx.fill(circlePath);
         ctx.restore();
