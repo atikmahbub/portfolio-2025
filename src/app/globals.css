@@ -130,21 +130,45 @@
   --glass-highlight-hover: inset 0 1px 0 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 0 rgba(0, 0, 0, 0.2); 
 }
 
-.dark .bg-dark-orbital {
+.dark .bg-dark-orbital,
+.dark body {
   background-color: #19104F !important; /* Deep indigo anchor / middle */
   background-image: 
     /* Top-Right Wine/Magenta */
     radial-gradient(ellipse farthest-corner at 100% 0%, rgba(77, 25, 54, 0.6) 0%, rgba(77, 25, 54, 0) 45%),
     /* Bottom-Left Wine/Magenta */
     radial-gradient(ellipse farthest-corner at 0% 100%, rgba(77, 25, 54, 0.6) 0%, rgba(77, 25, 54, 0) 45%) !important;
-  background-attachment: fixed !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
+@supports (-webkit-touch-callout: none) {
+  /* iOS specific background fix */
+  .dark .bg-dark-orbital,
+  .dark body {
+    background-attachment: scroll;
+  }
+}
+
+html,
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
   transition: background 0.6s ease, color 0.6s ease;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure background color is consistent across the entire document */
+html {
+  background-color: var(--background);
 }
 
 .glass-panel,
@@ -297,14 +321,25 @@ body {
     scroll-behavior: smooth;
     scroll-padding-top: 120px; /* Reserves space for fixed navbar */
   }
-  * {
-  @apply border-border outline-ring/50;
-  font-family: Satoshi, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  transition: background 0.6s ease, color 0.6s ease;
-}
+  * {
+    @apply border-border outline-ring/50;
+    font-family: Satoshi, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    transition: background 0.6s ease, color 0.6s ease;
+    /* Safe-area padding */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  #__next,
+  main {
+    overflow-x: hidden;
+    width: 100%;
+  }
 }

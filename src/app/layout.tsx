@@ -1,10 +1,10 @@
 import { Suspense } from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Inconsolata } from "next/font/google";
 import "./globals.css";
 import DotGridBackground from "@/components/DotGridBackground";
-import Navbar from "@/components/Navbar";
+import { StaggeredMenu } from "@/components/StaggeredMenu";
 import Providers from "@/components/Providers";
 import ThemeScript from "@/components/ThemeScript";
 import Analytics from "@/components/Analytics";
@@ -64,6 +64,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#070815",
+};
+
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -92,6 +99,22 @@ const structuredData = {
     },
   ],
 };
+
+const menuItems = [
+  { label: 'Home', ariaLabel: 'Go to home page', link: '#home' },
+  { label: 'About', ariaLabel: 'Learn about us', link: '#about' },
+  { label: 'Experience', ariaLabel: 'View our experience', link: '#experience' },
+  { label: 'Projects', ariaLabel: 'View our projects', link: '#projects' },
+  { label: 'Skills', ariaLabel: 'View our skills', link: '#skills' },
+  { label: 'Process', ariaLabel: 'View our process', link: '#process' },
+  { label: 'Testimonials', ariaLabel: 'View our testimonials', link: '#testimonials' },
+  { label: 'Contact', ariaLabel: 'Get in touch', link: '#contact' }
+];
+
+const socialItems = [
+  { label: 'GitHub', link: 'https://github.com/atikmahbub' },
+  { label: 'LinkedIn', link: 'https://linkedin.com/in/atik-mahbub' }
+];
 
 export default function RootLayout({
   children,
@@ -151,8 +174,15 @@ export default function RootLayout({
         </Script>
         <Providers>
           <DotGridBackground />
-          <Navbar />
-          <div className="relative z-0 pt-20 sm:pt-24">{children}</div>
+          <StaggeredMenu
+            isFixed
+            items={menuItems}
+            socialItems={socialItems}
+            colors={['#7C3AED', '#6366F1', '#06B6D4']}
+            accentColor="#6366F1"
+            displayItemNumbering={false}
+          />
+          <div className="relative z-0 pt-20 sm:pt-24 overflow-x-hidden">{children}</div>
         </Providers>
       </body>
     </html>
