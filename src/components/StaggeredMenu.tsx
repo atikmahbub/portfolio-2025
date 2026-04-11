@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import ThemeToggle from "@/components/ThemeToggle";
+import { useTheme } from "@/components/ThemeProvider";
 
 export interface StaggeredMenuItem {
   label: string;
@@ -196,6 +197,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     };
   }, [closeOnClickAway, open, closeMenu]);
 
+  const { theme } = useTheme();
+
   return (
     <div ref={wrapperRef} className={`sm-scope z-[999999] pointer-events-none fixed top-0 left-0 w-full h-screen`}>
       <div className="staggered-menu-wrapper relative w-full h-full" data-position={position}>
@@ -212,8 +215,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         <header 
           className="sm-header fixed top-0 left-0 w-full flex items-center justify-between p-[2em] z-[2000000] pointer-events-auto transition-all duration-300"
           style={{
-            backgroundColor: !showNavBg ? 'transparent' : '#19104F',
-            backgroundImage: (!showNavBg || isMobile) ? 'none' : `
+            backgroundColor: !showNavBg ? 'transparent' : (theme === 'dark' ? '#19104F' : '#f4f6fa'),
+            backgroundImage: (!showNavBg || isMobile || theme === 'light') ? 'none' : `
               radial-gradient(ellipse farthest-corner at 100% 0%, rgba(77, 25, 54, 0.6) 0%, rgba(77, 25, 54, 0) 45%),
               radial-gradient(ellipse farthest-corner at 0% 100%, rgba(77, 25, 54, 0.6) 0%, rgba(77, 25, 54, 0) 45%)
             `,

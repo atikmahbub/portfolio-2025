@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Inconsolata } from "next/font/google";
 import "./globals.css";
-import DotGridBackground from "@/components/DotGridBackground";
 import { StaggeredMenu } from "@/components/StaggeredMenu";
 import Providers from "@/components/Providers";
 import ThemeScript from "@/components/ThemeScript";
@@ -172,7 +171,6 @@ export default function RootLayout({
           {JSON.stringify(structuredData)}
         </Script>
         <Providers>
-          <DotGridBackground />
           <StaggeredMenu
             isFixed
             items={menuItems}
