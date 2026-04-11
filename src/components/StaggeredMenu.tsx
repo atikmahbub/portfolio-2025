@@ -61,6 +61,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const textInnerRef = useRef<HTMLSpanElement | null>(null);
   
   const [textLines, setTextLines] = useState<string[]>(['Menu', 'Close']);
+  const [showNavBg, setShowNavBg] = useState(true);
   const busyRef = useRef(false);
 
   // Initialize GSAP state on mount
@@ -71,8 +72,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       if (!panel) return;
 
       const offscreen = position === 'left' ? -100 : 100;
-      gsap.set(panel, { xPercent: offscreen, autoAlpha: 0 });
-      if (layers) gsap.set(layers, { xPercent: offscreen, autoAlpha: 0 });
+      gsap.set(panel, { xPercent: offscreen, opacity: 0, visibility: 'hidden' });
+      if (layers) gsap.set(layers, { xPercent: offscreen, opacity: 0, visibility: 'hidden' });
 
       gsap.set(plusHRef.current, { rotate: 0 });
       gsap.set(plusVRef.current, { rotate: 90 });
@@ -112,6 +113,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
     if (nextOpen) {
       onMenuOpen?.();
+      setShowNavBg(false);
       
       // Reset items
       gsap.set(itemLabels, { yPercent: 140, rotate: 10, opacity: 0 });
@@ -119,7 +121,14 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       gsap.set(socials, { y: 20, opacity: 0 });
 
       // Panel & Layers animation
-      tl.to([panel, ...layers], { autoAlpha: 1, xPercent: 0, duration: 0.35, ease: 'power4.out', stagger: 0.03 });
+      tl.to([panel, ...layers], { 
+        visibility: 'visible',
+        opacity: 1, 
+        xPercent: 0, 
+        duration: 0.35, 
+        ease: 'power4.out', 
+        stagger: 0.03 
+      });
       
       // Items animation
       tl.to(itemLabels, { yPercent: 0, rotate: 0, opacity: 1, duration: 0.4, ease: 'power4.out', stagger: 0.05 }, "-=0.25");
@@ -137,7 +146,14 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       onMenuClose?.();
       
       // Panel & Layers animation
-      tl.to([...layers.reverse(), panel], { xPercent: offscreen, autoAlpha: 0, duration: 0.25, ease: 'power3.in', stagger: 0.03 });
+      tl.to([...layers.reverse(), panel], { 
+        xPercent: offscreen, 
+        opacity: 0,
+        visibility: 'hidden',
+        duration: 0.25, 
+        ease: 'power3.in', 
+        stagger: 0.03 
+      });
 
       // Icon animation
       gsap.to(plusHRef.current, { rotate: 0, duration: 0.3, ease: 'power3.inOut' });
@@ -146,6 +162,11 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       // Text animation
       setTextLines(['Close', 'Menu', 'Close', 'Menu']);
       gsap.fromTo(textInnerRef.current, { yPercent: 0 }, { yPercent: -75, duration: 0.5, ease: 'power4.out' });
+
+      // Return background only after animation finishes
+      setTimeout(() => {
+        if (!openRef.current) setShowNavBg(true);
+      }, 500);
     }
   }, [position, onMenuOpen, onMenuClose]);
 
@@ -168,15 +189,30 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }, [closeOnClickAway, open, closeMenu]);
 
   return (
-    <div ref={wrapperRef} className={`sm-scope z-[9999] pointer-events-none fixed top-0 left-0 w-full h-screen`}>
+    <div ref={wrapperRef} className={`sm-scope z-[999999] pointer-events-none fixed top-0 left-0 w-full h-screen`}>
       <div className="staggered-menu-wrapper relative w-full h-full" data-position={position}>
         <div ref={preLayersRef} className="sm-prelayers absolute top-0 right-0 bottom-0 pointer-events-none z-[10000]">
           {(colors || ['#1e1e22', '#35353c']).slice(0, 3).map((c, i) => (
-            <div key={i} className="sm-prelayer absolute top-0 right-0 h-full w-full" style={{ background: c }} />
+            <div 
+              key={i} 
+              className="sm-prelayer absolute top-0 right-0 h-full w-full" 
+              style={{ background: c, visibility: 'hidden', opacity: 0 }} 
+            />
           ))}
         </div>
 
-        <header className="sm-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] z-[10002] pointer-events-none">
+        <header 
+          className="sm-header fixed top-0 left-0 w-full flex items-center justify-between p-[2em] z-[2000000] pointer-events-auto transition-all duration-300"
+          style={{
+            backgroundColor: !showNavBg ? 'transparent' : '#19104F',
+            backgroundImage: !showNavBg ? 'none' : `
+              radial-gradient(ellipse farthest-corner at 100% 0%, rgba(77, 25, 54, 0.6) 0%, rgba(77, 25, 54, 0) 45%),
+              radial-gradient(ellipse farthest-corner at 0% 100%, rgba(77, 25, 54, 0.6) 0%, rgba(77, 25, 54, 0) 45%)
+            `,
+            backgroundAttachment: 'fixed',
+            backgroundSize: 'cover'
+          }}
+        >
           <div className="sm-logo pointer-events-auto">
             <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-white/60">
               <span className="h-2 w-2 rounded-full bg-[#7DD3FC]" />
@@ -205,8 +241,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
         <aside
           ref={panelRef}
-          className="sm-panel absolute top-0 right-0 h-full bg-white/95 dark:bg-[#070815]/95 flex flex-col p-[6rem_2rem_2rem] overflow-y-auto z-[10001] backdrop-blur-xl pointer-events-auto shadow-2xl"
-          style={{ width: 'clamp(280px, 40vw, 450px)' }}
+          className="sm-panel absolute top-0 right-0 h-full bg-white/95 dark:bg-[#070815]/95 flex flex-col p-[6rem_2rem_2rem] overflow-y-auto z-[1000000] backdrop-blur-xl pointer-events-auto shadow-2xl"
+          style={{ width: 'clamp(280px, 40vw, 450px)', visibility: 'hidden', opacity: 0 }}
         >
           <div className="sm-panel-inner flex-1 flex flex-col gap-8">
             <ul className="sm-panel-list list-none m-0 p-0 flex flex-col gap-4" data-numbering={displayItemNumbering || undefined}>
