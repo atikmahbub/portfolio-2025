@@ -1,5 +1,6 @@
+"use client";
+
 import SectionHeading from "@/components/SectionHeading";
-import Reveal from "@/components/Reveal";
 import { ArrowUpRight } from "lucide-react";
 import { preventOrphans } from "@/lib/utils";
 
@@ -137,74 +138,70 @@ export default function ProjectsSection() {
           description="A handful of builds I’ve helped bring to life, from finance tools to AI agents."
         />
 
-        <Reveal>
-          <div className="grid gap-4 md:grid-cols-3">
-            {projectMetrics.map((metric) => (
-              <div
-                key={metric.label}
-                className="glow-card px-5 py-4 text-left text-slate-600 transition-colors hover:text-slate-900 dark:text-white/70 dark:hover:text-white"
-              >
-                <p className="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/40">
-                  {metric.label}
-                </p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">
-                  {metric.value}
-                </p>
-                <p className="mt-1 text-sm">{metric.description}</p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
+        <div className="grid gap-4 md:grid-cols-3">
+          {projectMetrics.map((metric) => (
+            <div
+              key={metric.label}
+              className="glow-card px-5 py-4 text-left text-slate-600 transition-colors hover:text-slate-900 dark:text-white/70 dark:hover:text-white"
+            >
+              <p className="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/40">
+                {metric.label}
+              </p>
+              <p className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">
+                {metric.value}
+              </p>
+              <p className="mt-1 text-sm">{metric.description}</p>
+            </div>
+          ))}
+        </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
-            <Reveal key={project.name} delay={index * 0.05}>
-              <article className="glow-card group flex h-full flex-col gap-6 p-7 text-slate-700 transition-colors hover:text-slate-900 dark:text-white/80 dark:hover:text-white">
-                <span className="self-start rounded-full border border-slate-200 bg-white/85 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-slate-600 shadow-sm dark:border-[#7DD3FC]/30 dark:bg-[#7DD3FC]/10 dark:text-[#7DD3FC]">
-                  {project.type}
-                </span>
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">
-                    {preventOrphans(project.name)}
-                  </h3>
-                  <p className="text-sm text-slate-600 group-hover:text-slate-800 dark:text-white/70 dark:group-hover:text-white/80">
-                    {preventOrphans(project.summary)}
+          {projects.map((project) => (
+            <article key={project.name} className="glow-card group flex h-full flex-col gap-6 p-7 text-slate-700 transition-colors hover:text-slate-900 dark:text-white/80 dark:hover:text-white">
+              <span className="self-start rounded-full border border-slate-200 bg-white/85 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-slate-600 shadow-sm dark:border-[#7DD3FC]/30 dark:bg-[#7DD3FC]/10 dark:text-[#7DD3FC]">
+                {project.type}
+              </span>
+              <div className="space-y-4">
+                <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">
+                  {preventOrphans(project.name)}
+                </h3>
+                <p className="text-sm text-slate-600 group-hover:text-slate-800 dark:text-white/70 dark:group-hover:text-white/80">
+                  {preventOrphans(project.summary)}
+                </p>
+                {project.outcome ? (
+                  <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                    {preventOrphans(project.outcome)}
                   </p>
-                  {project.outcome ? (
-                    <p className="text-sm font-semibold text-slate-900 dark:text-white">
-                      {preventOrphans(project.outcome)}
-                    </p>
-                  ) : null}
+                ) : null}
+              </div>
+              <div className="mt-auto space-y-5">
+                <div className="flex flex-wrap gap-2 text-xs text-slate-500 dark:text-white/60">
+                  {project.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 font-medium uppercase tracking-widest text-slate-600 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white/70"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-                <div className="mt-auto space-y-5">
-                  <div className="flex flex-wrap gap-2 text-xs text-slate-500 dark:text-white/60">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 font-medium uppercase tracking-widest text-slate-600 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white/70"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  {project.cta?.label &&
-                    (project.cta.href ? (
-                      <a
-                        href={project.cta.href}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-500 transition hover:text-slate-900 dark:text-[#A9A3FF] dark:hover:text-white"
-                        target="_blank"
-                      >
-                        {project.cta.label}
-                        <ArrowUpRight className="h-4 w-4" />
-                      </a>
-                    ) : (
-                      <span className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 dark:text-white/50">
-                        {project.cta.label}
-                      </span>
-                    ))}
-                </div>
-              </article>
-            </Reveal>
+                {project.cta?.label &&
+                  (project.cta.href ? (
+                    <a
+                      href={project.cta.href}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-500 transition hover:text-slate-900 dark:text-[#A9A3FF] dark:hover:text-white"
+                      target="_blank"
+                    >
+                      {project.cta.label}
+                      <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  ) : (
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 dark:text-white/50">
+                      {project.cta.label}
+                    </span>
+                  ))}
+              </div>
+            </article>
           ))}
         </div>
       </div>
