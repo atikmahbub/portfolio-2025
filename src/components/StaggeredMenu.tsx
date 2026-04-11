@@ -62,15 +62,34 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const textInnerRef = useRef<HTMLSpanElement | null>(null);
   
   const [textLines, setTextLines] = useState<string[]>(['Menu', 'Close']);
-  const [showNavBg, setShowNavBg] = useState(true);
+  const [showNavBg, setShowNavBg] = useState(false); // Start transparent
   const busyRef = useRef(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    
+    // Scroll listener to toggle background visibility
+    const handleScroll = () => {
+      // If we are at the top, hide the background (make it part of the body)
+      // On scroll down, show it to mask content
+      if (window.scrollY > 20) {
+        setShowNavBg(true);
+      } else {
+        setShowNavBg(false);
+      }
+    };
+
     checkMobile();
+    handleScroll(); // Initial check
+
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   // Initialize GSAP state on mount
@@ -198,6 +217,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }, [closeOnClickAway, open, closeMenu]);
 
   const { theme } = useTheme();
+  const isScrolled = showNavBg;
+  const navBgColor = theme === 'dark' ? '#19104F' : '#f4f6fa';
 
   return (
     <div ref={wrapperRef} className={`sm-scope z-[999999] pointer-events-none fixed top-0 left-0 w-full h-screen`}>
@@ -213,20 +234,14 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         </div>
 
         <header 
-          className="sm-header fixed top-0 left-0 w-full flex items-center justify-between p-[2em] z-[2000000] pointer-events-auto transition-all duration-300"
+          className={`sm-header fixed top-0 left-0 w-full flex items-center justify-between p-[1.5em] sm:p-[2em] z-[100] pointer-events-auto transition-all duration-500 ease-in-out ${isScrolled && !open ? 'shadow-[0_8px_30px_rgb(0,0,0,0.12)]' : ''}`}
           style={{
-            backgroundColor: !showNavBg ? 'transparent' : (theme === 'dark' ? '#19104F' : '#f4f6fa'),
-            backgroundImage: (!showNavBg || isMobile || theme === 'light') ? 'none' : `
-              radial-gradient(ellipse farthest-corner at 100% 0%, rgba(77, 25, 54, 0.6) 0%, rgba(77, 25, 54, 0) 45%),
-              radial-gradient(ellipse farthest-corner at 0% 100%, rgba(77, 25, 54, 0.6) 0%, rgba(77, 25, 54, 0) 45%)
-            `,
-            backgroundAttachment: isMobile ? 'scroll' : 'fixed',
-            backgroundSize: 'cover'
+            backgroundColor: (isScrolled && !open) ? navBgColor : 'transparent',
           }}
         >
           <div className="sm-logo pointer-events-auto">
             <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-white/60">
-              <span className="h-2 w-2 rounded-full bg-[#7DD3FC]" />
+              <span className="h-2 w-2 rounded-full bg-[#7C3AED]" />
               Atik Mahbub
             </div>
           </div>
@@ -252,7 +267,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
         <aside
           ref={panelRef}
-          className="sm-panel absolute top-0 right-0 h-full bg-white/95 dark:bg-[#070815]/95 flex flex-col p-[6rem_2rem_2rem] overflow-y-auto z-[1000000] backdrop-blur-xl pointer-events-auto shadow-2xl"
+          className="sm-panel absolute top-0 right-0 h-full bg-white/98 dark:bg-[#070815]/98 flex flex-col p-[6rem_2rem_2rem] overflow-y-auto z-[200] backdrop-blur-none sm:backdrop-blur-xl pointer-events-auto shadow-2xl"
           style={{ width: 'clamp(280px, 40vw, 450px)', visibility: 'hidden', opacity: 0 }}
         >
           <div className="sm-panel-inner flex-1 flex flex-col gap-8">
