@@ -1,103 +1,88 @@
-import SectionHeading from "@/components/SectionHeading";
-import Reveal from "@/components/Reveal";
-import { preventOrphans } from "@/lib/utils";
-
-const phases = [
+const steps = [
   {
-    stage: "01 — Discover & De-risk",
-    title: "Map the unknown before building.",
-    copy: "Audit existing systems, define scope rigidly, and identify technical risks to ensure predictable timelines.",
+    n: "01",
+    k: "Discover & De-risk",
+    h: "Map the unknown before building.",
+    p: "Audit existing systems, define scope rigidly, and identify technical risks to keep timelines predictable.",
+    out: "→ Reduced technical risk",
   },
   {
-    stage: "02 — Architect & Align",
-    title: "Design for scale and clarity.",
-    copy: "Draft APIs, establish data contracts, and align the team on a resilient, scalable architecture.",
+    n: "02",
+    k: "Architect & Align",
+    h: "Design for scale and clarity.",
+    p: "Draft APIs, establish data contracts, and align the team on resilient, scalable architecture.",
+    out: "→ Shared source of truth",
   },
   {
-    stage: "03 — Execute & Operate",
-    title: "Ship reliably, monitor constantly.",
-    copy: "Execute with automated testing, robust CI/CD, and strict telemetry. Launching shouldn't be stressful.",
+    n: "03",
+    k: "Execute & Operate",
+    h: "Ship reliably, monitor constantly.",
+    p: "Automated testing, robust CI/CD, and strict telemetry. Launching shouldn't be stressful.",
+    out: "→ Calm, confident launches",
   },
 ];
 
-const processSignals = [
+const foot = [
   {
-    label: "Discovery → Delivery",
-    value: "3-6 weeks",
-    detail: "Typical loop from kickoff to first launch.",
+    k: "Discovery → Delivery",
+    v: "3–6 weeks",
+    d: "Typical loop from kickoff to first launch.",
   },
   {
-    label: "Feedback loops",
-    value: "Daily async notes",
-    detail: "Docs, Looms, and dashboards keep everyone aligned.",
+    k: "Feedback loops",
+    v: "Daily async notes",
+    d: "Docs, Looms, and dashboards keep everyone aligned.",
   },
   {
-    label: "Confidence",
-    value: "Telemetry + QA",
-    detail: "Observability + CI guardrails baked in from day one.",
+    k: "Confidence",
+    v: "Telemetry + QA",
+    d: "Observability & CI guardrails from day one.",
   },
 ];
 
 export default function ProcessSection() {
   return (
-    <section id="process" className="relative px-6 py-10 sm:py-16">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
-        <SectionHeading
-          eyebrow="Process & Delivery"
-          title="Predictable execution, zero surprises."
-          description="A structured engineering cadence designed to reduce risk, maintain momentum, and ship reliable software."
-          align="center"
-        />
+    <section className="dark pad" id="process">
+      <div className="wrap">
+        <div className="shead">
+          <div className="shead-top">
+            <span className="eyebrow">
+              Process <span className="bk">/ 05</span>
+            </span>
+            <span className="sidx">How I work</span>
+          </div>
+          <div className="lead-row">
+            <h2 className="section-title reveal">
+              Predictable execution, zero surprises.
+            </h2>
+            <p className="section-lead reveal d1">
+              A structured engineering cadence designed to reduce risk, keep momentum,
+              and ship reliable software.
+            </p>
+          </div>
+        </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {phases.map((phase, index) => (
-            <Reveal key={phase.stage} delay={index * 0.07}>
-              <div className="glow-card group flex h-full flex-col gap-4 border border-transparent p-8 text-slate-700 transition-all hover:-translate-y-1 hover:border-slate-200 hover:text-slate-900 dark:text-white/75 dark:hover:border-white/10 dark:hover:text-white">
-                <span className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500 group-hover:text-slate-700 dark:text-white/45 dark:group-hover:text-white/60">
-                  {phase.stage}
-                </span>
-                <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">
-                  {preventOrphans(phase.title)}
-                </h3>
-                <p className="text-sm text-slate-600 group-hover:text-slate-800 dark:text-white/70 dark:group-hover:text-white/80">
-                  {preventOrphans(phase.copy)}
-                </p>
-                <span className="text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-white/50">
-                  Outcome: Reduced technical risk
-                </span>
-              </div>
-            </Reveal>
+        <div className="process-grid">
+          {steps.map((s, i) => (
+            <div className={`step reveal${i > 0 ? ` d${i}` : ""}`} key={s.n}>
+              <div className="n">{s.n}</div>
+              <div className="k">{s.k}</div>
+              <h3>{s.h}</h3>
+              <p>{s.p}</p>
+              <div className="out">{s.out}</div>
+            </div>
           ))}
         </div>
 
-        <Reveal delay={0.1}>
-          <div className="glow-card grid gap-4 p-8 text-slate-700 dark:text-white/80">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <p className="text-lg font-semibold text-slate-900 dark:text-white">
-                What working together feels like
-              </p>
-              <span className="rounded-full border border-slate-200/70 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-slate-600 dark:border-white/15 dark:text-white/70">
-                Builder / Partner
-              </span>
+        <div className="process-foot">
+          {foot.map((f, i) => (
+            <div className={`pf reveal${i > 0 ? ` d${i}` : ""}`} key={f.k}>
+              <div className="k">{f.k}</div>
+              <div className="v">{f.v}</div>
+              <div className="d">{f.d}</div>
             </div>
-            <div className="grid gap-4 md:grid-cols-3">
-              {processSignals.map((signal) => (
-                <div
-                  key={signal.label}
-                  className="rounded-2xl border border-slate-200/80 bg-white/75 p-4 text-left text-sm text-slate-600 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white/75"
-                >
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-slate-400 dark:text-white/50">
-                    {signal.label}
-                  </p>
-                  <p className="mt-2 text-xl font-semibold text-slate-900 dark:text-white">
-                    {signal.value}
-                  </p>
-                  <p className="mt-1 text-sm">{signal.detail}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

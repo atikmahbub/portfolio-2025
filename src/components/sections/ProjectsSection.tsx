@@ -1,210 +1,142 @@
-"use client";
-
-import SectionHeading from "@/components/SectionHeading";
-import { ArrowUpRight } from "lucide-react";
-import { preventOrphans } from "@/lib/utils";
-
-type Project = {
-  name: string;
-  type: string;
-  summary: string;
-  outcome?: string;
-  stack: string[];
-  cta?: {
-    label: string;
-    href?: string;
-  };
-};
-
-const projectMetrics = [
+const projects = [
   {
-    label: "Launches",
-    value: "20+",
-    description: "Net-new products, design systems, and internal tools",
+    num: "01",
+    tag: "Mobile · Fintech",
+    status: "live" as const,
+    statusLabel: "Live on Play Store",
+    title: "Scalar",
+    desc: "A real-time finance tracker giving users live visibility into their money — live on Google Play Store.",
+    chips: ["React Native", "TypeScript", "Express", "Prisma", "MySQL"],
+    linkLabel: "View on Play Store",
+    href: "https://play.google.com/store/apps/details?id=com.atik.aether",
   },
   {
-    label: "Stacks",
-    value: "Web, AI, Web3",
-    description: "Pairing React/Next.js with data, AI, or EVM layers",
+    num: "02",
+    tag: "AI + Operations",
+    status: "live" as const,
+    statusLabel: "Live",
+    title: "Omni Intelligence",
+    desc: "A modular React component system that cut deployment friction to near zero for 5+ engineering pods.",
+    chips: ["React", "Docusaurus", "Redux", "Docker", "TypeScript"],
+    linkLabel: "View case study",
+    href: "https://omniintelligence.online/",
   },
   {
-    label: "Engagement",
-    value: "0 → 1 & Scale",
-    description: "Comfortable jumping into greenfield or established teams",
-  },
-];
-
-const projects: Project[] = [
-  {
-    name: "Tracking Wallet",
-    type: "Full-stack Fintech Web App",
-    summary:
-      "Problem: Users lacked real-time visibility into their finances. Role: Architected a full-stack, real-time finance tracker.",
-    outcome:
-      "Outcome: Scaled to handle thousands of daily transactions with 99.9% uptime, reducing average database query times to under 50ms.",
-    stack: [
-      "React",
-      "TypeScript",
-      "Express",
-      "Prisma",
-      "Auth0",
-      "MySQL",
-      "Netlify",
-      "Railway",
-    ],
-    cta: {
-      label: "See Implementation →",
-      href: "https://tracking-wallet.netlify.app/",
-    },
+    num: "03",
+    tag: "Medical AI",
+    status: "case" as const,
+    statusLabel: "Case study",
+    title: "Smart Retina",
+    desc: "Scalable React UIs backed by secure Django REST APIs, cutting clinical review time by over 60%.",
+    chips: ["React", "Django REST", "Redux", "Docker", "Azure"],
+    linkLabel: "Ask for architecture",
+    href: "#contact",
   },
   {
-    name: "Omni Intelligence",
-    type: "AI + Operations Platform",
-    summary:
-      "Problem: Fragmented UIs and delayed deployments stalled ops teams. Role: Led development of a modular React component system.",
-    outcome:
-      "Outcome: Accelerated cross-team feature delivery by 40%, dropping deployment friction to near zero for 5+ engineering pods.",
-    stack: ["React", "Docusaurus", "Redux", "Docker", "TypeScript"],
-    cta: {
-      label: "View Case Study →",
-      href: "https://omniintelligence.online/",
-    },
-  },
-  {
-    name: "1Shot Prompt Builder",
-    type: "★ Featured Case Study",
-    summary:
-      "Problem: Orchestrating fragmented smart contracts manually wasted hundreds of developer hours. Role: Led end-to-end React/Next.js build with recursive ABI parsers.",
-    outcome:
-      "Outcome: Reclaimed 30+ hours/week per protocol team by templatizing complex EVM workflows into reliable, robust building blocks.",
-    stack: [
-      "React",
-      "Next.js",
-      "Solidity",
-      "Ethers.js",
-      "tRPC",
-      "TypeScript",
-      "OpenAI",
-    ],
-    cta: {
-      label: "Read Full Case Study →",
-      href: "https://1shotapi.com/",
-    },
-  },
-  {
-    name: "Smart Retina",
-    type: "Medical AI Screening Platform",
-    summary:
-      "Problem: Manual clinical reviews created a severe diagnostic backlog. Role: Engineered scalable React UIs backed by secure Django REST APIs.",
-    outcome:
-      "Outcome: Reduced clinical review time by over 60%, serving thousands of AI-driven inferences with strict data security.",
-    stack: ["React", "Django REST", "Redux", "Docker", "Azure"],
-    cta: {
-      label: "View Architecture →",
-      href: "#",
-    },
-  },
-  {
-    name: "Glu",
-    type: "Education Platform",
-    summary:
-      "Problem: Disconnected communication pipelines fractured parent-teacher alignment. Role: Built centralized web dashboards and scalable message routing.",
-    outcome:
-      "Outcome: Processed 100k+ weekly events reliably, centralizing disjointed communications across 20+ school districts seamlessly.",
-    stack: ["React", "Node.js", "TypeScript", "Docker"],
-  },
-  {
-    name: "Istanbul Medic Agent",
-    type: "AI Agentic Platform (In Progress)",
-    summary:
-      "Problem: Healthcare support staff overwhelmed by routine inquiries. Role: Architecting LLM-driven agents using Next.js 15 and robust RAG pipelines.",
-    outcome:
-      "Outcome: Targeting a 50% deflection rate in routine queries, freeing up human agents for mission-critical patient care.",
-    stack: ["Next.js 15", "Tailwind", "OpenAI SDK", "Vectors"],
-    cta: {
-      label: "View Prototype →",
-      href: "https://istanbulmedic.com/en",
-    },
+    num: "04",
+    tag: "AI Agentic",
+    status: "wip" as const,
+    statusLabel: "In progress",
+    title: "Istanbul Medic Agent",
+    desc: "LLM-driven agents on Next.js 15 with robust RAG pipelines, targeting a 50% deflection rate on routine queries.",
+    chips: ["Next.js 15", "Tailwind", "OpenAI SDK", "Vectors"],
+    linkLabel: "View prototype",
+    href: "https://istanbulmedic.com/",
   },
 ];
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="relative px-6 py-10 sm:py-16">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
-        <SectionHeading
-          eyebrow="Projects"
-          title="Product work across fintech, AI, and healthcare."
-          description="A handful of builds I’ve helped bring to life, from finance tools to AI agents."
-        />
-
-        <div className="grid gap-4 md:grid-cols-3">
-          {projectMetrics.map((metric) => (
-            <div
-              key={metric.label}
-              className="glow-card px-5 py-4 text-left text-slate-600 transition-colors hover:text-slate-900 dark:text-white/70 dark:hover:text-white"
-            >
-              <p className="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/40">
-                {metric.label}
-              </p>
-              <p className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">
-                {metric.value}
-              </p>
-              <p className="mt-1 text-sm">{metric.description}</p>
-            </div>
-          ))}
+    <section className="pad" id="work">
+      <div className="wrap">
+        <div className="shead">
+          <div className="shead-top">
+            <span className="eyebrow">
+              Selected Work <span className="bk">/ 03</span>
+            </span>
+            <span className="sidx">Fintech · AI · Web3 · Health</span>
+          </div>
+          <div className="lead-row">
+            <h2 className="section-title reveal">
+              Product work that shipped and scaled.
+            </h2>
+            <p className="section-lead reveal d1">
+              A handful of builds I&apos;ve helped bring to life — from finance tools to AI
+              agents and on-chain platforms.
+            </p>
+          </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <article key={project.name} className={`glow-card group flex h-full flex-col gap-6 p-7 text-slate-700 transition-colors hover:text-slate-900 dark:text-white/80 dark:hover:text-white ${project.type.includes("Featured") ? "border-indigo-500/30 bg-indigo-500/[0.02]" : ""}`}>
-              <span className={`self-start rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.3em] shadow-sm ${project.type.includes("Featured") ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:border-indigo-400/30 dark:bg-indigo-400/10 dark:text-indigo-300" : "border-slate-200 bg-white/85 text-slate-600 dark:border-[#7DD3FC]/30 dark:bg-[#7DD3FC]/10 dark:text-[#7DD3FC]"}`}>
-                {project.type}
-              </span>
-              <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">
-                  {preventOrphans(project.name)}
-                </h3>
-                <p className="text-sm text-slate-600 group-hover:text-slate-800 dark:text-white/70 dark:group-hover:text-white/80">
-                  {preventOrphans(project.summary)}
-                </p>
-                {project.outcome ? (
-                  <p className="text-sm font-semibold text-slate-900 dark:text-white">
-                    {preventOrphans(project.outcome)}
-                  </p>
-                ) : null}
-              </div>
-              <div className="mt-auto space-y-5">
-                <div className="flex flex-wrap gap-2 text-xs text-slate-500 dark:text-white/60">
-                  {project.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 font-medium uppercase tracking-widest text-slate-600 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white/70"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+        {/* Featured */}
+        <div className="featured reveal">
+          <div className="f-l">
+            <div className="f-num">★ Featured / 1Shot Prompt Builder</div>
+            <h3>1Shot Prompt Builder</h3>
+            <p>
+              Orchestrating fragmented smart contracts manually wasted hundreds of
+              developer hours. I led the end-to-end React/Next.js build with recursive
+              ABI parsers that templatize complex EVM workflows.
+            </p>
+            <div className="chips">
+              {["React", "Next.js", "Solidity", "Ethers.js", "tRPC", "TypeScript", "OpenAI"].map(
+                (c) => (
+                  <span className="chip" key={c}>
+                    {c}
+                  </span>
+                )
+              )}
+            </div>
+            <a
+              href="https://1shotapi.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn acc"
+            >
+              Read Case Study <span className="arrow">↗</span>
+            </a>
+          </div>
+          <div className="f-r">
+            <div className="k">Outcome</div>
+            <div className="big">
+              Reclaimed <span className="ac">30+ hrs/week</span> per protocol team.
+            </div>
+            <div className="out">
+              Complex on-chain workflows reduced to reliable, reusable building blocks.
+            </div>
+          </div>
+        </div>
+
+        <div className="work-grid">
+          {projects.map((p, i) => (
+            <article className={`work-card reveal${i % 2 === 1 ? " d1" : ""}`} key={p.num}>
+              <div className="wc-top">
+                <div className="wc-num">{p.num}</div>
+                <div className="wc-tag">
+                  {p.tag}
+                  <br />
+                  <span className={`st ${p.status}`}>
+                    <span className="d" />
+                    {p.statusLabel}
+                  </span>
                 </div>
-                {project.cta?.label &&
-                  (project.cta.href ? (
-                    <a
-                      href={project.cta.href}
-                      className={`inline-flex items-center gap-2 text-sm font-bold transition-all px-4 py-2 rounded-full ${
-                        project.type.includes("Featured")
-                          ? "bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
-                          : "text-indigo-500 hover:text-slate-900 dark:text-indigo-400 dark:hover:text-white border border-transparent hover:border-slate-200/50 dark:hover:border-white/10"
-                      }`}
-                      target="_blank"
-                    >
-                      {project.cta.label}
-                      <ArrowUpRight className="h-4 w-4" />
-                    </a>
-                  ) : (
-                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 dark:text-white/50">
-                      {project.cta.label}
-                    </span>
-                  ))}
               </div>
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+              <div className="chips">
+                {p.chips.map((c) => (
+                  <span className="chip" key={c}>
+                    {c}
+                  </span>
+                ))}
+              </div>
+              <a
+                href={p.href}
+                target={p.href.startsWith("http") ? "_blank" : undefined}
+                rel={p.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="link"
+              >
+                {p.linkLabel} <span className="arrow">↗</span>
+              </a>
             </article>
           ))}
         </div>

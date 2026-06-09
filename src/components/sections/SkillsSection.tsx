@@ -1,93 +1,84 @@
-"use client";
-
-import SectionHeading from "@/components/SectionHeading";
-import { preventOrphans } from "@/lib/utils";
-
-const skillBuckets = [
+const cols = [
   {
+    glyph: "{ }",
+    ix: "C/01",
     title: "Frontend & Product Craft",
-    description:
-      "Bridging the gap between design and high-performance user interfaces.",
-    spotlight: "Building UIs that feel instantly responsive.",
+    tease: "UIs that feel instantly responsive.",
     items: [
-      "Deliver pixel-perfect, responsive UX",
-      "Architect scalable, reusable design systems",
-      "Optimize frontend performance at scale",
-      "Integrate AI & Web3 features seamlessly",
-      "Translate roadmaps into clear tech plans",
+      "Pixel-perfect, responsive UX",
+      "Scalable, reusable design systems",
+      "Frontend performance at scale",
+      "AI & Web3 feature integration",
+      "Roadmaps → clear tech plans",
     ],
   },
   {
+    glyph: "</>",
+    ix: "C/02",
     title: "Backend & Systems Architecture",
-    description:
-      "Engineering robust foundations that handle real-world traffic reliably.",
-    spotlight: "Strict TypeScript and scalable data layers.",
+    tease: "Strict types, scalable data layers.",
     items: [
-      "Design APIs that scale under load",
-      "Enforce strict TypeScript data contracts",
-      "Model robust relational database schemas",
-      "Build type-safe, resilient microservices",
-      "Develop secure, production-ready smart contracts",
+      "APIs that scale under load",
+      "Strict TypeScript data contracts",
+      "Robust relational schemas",
+      "Type-safe, resilient microservices",
+      "Production-ready smart contracts",
     ],
   },
   {
+    glyph: "⌘",
+    ix: "C/03",
     title: "Engineering Operations",
-    description:
-      "Turning unpredictable development into a predictable, calm machine.",
-    spotlight: "From local commit to production deployment.",
+    tease: "From local commit to production.",
     items: [
-      "Automate CI/CD for zero-downtime deployments",
-      "Implement production-ready telemetry & logging",
-      "Mentor teams on scalable engineering habits",
-      "Establish standards that prevent regressions",
-      "Write documentation that drives team adoption",
+      "CI/CD for zero-downtime deploys",
+      "Production telemetry & logging",
+      "Mentoring on scalable habits",
+      "Standards that prevent regressions",
+      "Docs that drive adoption",
     ],
   },
 ];
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="relative px-6 py-10 sm:py-16">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
-        <SectionHeading
-          eyebrow="Capabilities"
-          title="Where engineering meets product vision."
-          description="How I blend product thinking with dependable engineering habits."
-        />
+    <section className="pad" id="skills" style={{ background: "var(--paper-2)" }}>
+      <div className="wrap">
+        <div className="shead">
+          <div className="shead-top">
+            <span className="eyebrow">
+              Capabilities <span className="bk">/ 04</span>
+            </span>
+            <span className="sidx">What I bring</span>
+          </div>
+          <div className="lead-row">
+            <h2 className="section-title reveal">
+              Where engineering meets product vision.
+            </h2>
+            <p className="section-lead reveal d1">
+              How I blend product thinking with dependable engineering habits — from
+              first commit to production.
+            </p>
+          </div>
+        </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {skillBuckets.map((bucket) => (
-            <div key={bucket.title} className="glow-card flex h-full flex-col gap-5 p-7 text-slate-700 transition-all duration-300 hover:text-slate-900 dark:text-white/70 dark:hover:text-white opacity-85 hover:opacity-100">
-              <span className="self-start rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-slate-500 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white/40">
-                {bucket.title}
-              </span>
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                {preventOrphans(bucket.title)}
-              </h3>
-              <p className="text-sm text-slate-600 dark:text-white/65">
-                {preventOrphans(bucket.description)}
-              </p>
-              {bucket.spotlight && (
-                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-indigo-500/80 dark:text-indigo-400/60">
-                  {preventOrphans(bucket.spotlight)}
-                </p>
-              )}
-              <ul className="mt-auto space-y-3 text-sm">
-                {bucket.items.map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <span className="inline-flex h-2 w-2 shrink-0 rounded-full bg-gradient-to-br from-[#A9A3FF] to-[#7DD3FC]" />
-                    <span className="font-semibold text-slate-700 dark:text-white/90">
-                      {item}
-                    </span>
+        <div className="skills-grid">
+          {cols.map((col, i) => (
+            <div className={`skill-col reveal${i > 0 ? ` d${i}` : ""}`} key={col.ix}>
+              <div className="sc-top">
+                <span className="glyph">{col.glyph}</span>
+                <span className="ix">{col.ix}</span>
+              </div>
+              <h3>{col.title}</h3>
+              <div className="tease">{col.tease}</div>
+              <ul>
+                {col.items.map((item, j) => (
+                  <li key={j}>
+                    <span className="no">{String(j + 1).padStart(2, "0")}</span>
+                    {item}
                   </li>
                 ))}
               </ul>
-              <a
-                href="#projects"
-                className="inline-flex items-center text-xs font-semibold uppercase tracking-[0.35em] text-slate-500 transition hover:text-slate-900 dark:text-white/60 dark:hover:text-white"
-              >
-                See examples →
-              </a>
             </div>
           ))}
         </div>

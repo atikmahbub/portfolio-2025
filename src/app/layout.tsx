@@ -1,21 +1,13 @@
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Inconsolata } from "next/font/google";
 import "./globals.css";
-import { StaggeredMenu } from "@/components/StaggeredMenu";
+import Navbar from "@/components/Navbar";
 import Providers from "@/components/Providers";
-import ThemeScript from "@/components/ThemeScript";
 import Analytics from "@/components/Analytics";
+import ScrollReveal from "@/components/ScrollReveal";
+import BackToTop from "@/components/BackToTop";
 import { GA_MEASUREMENT_ID } from "@/constants/constants";
-
-// Poppins removed in favor of Satoshi in globals.css
-
-const inconsolata = Inconsolata({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://atikmahbub.netlify.app"),
@@ -67,7 +59,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#070815",
+  themeColor: "#EEEBE3",
 };
 
 const structuredData = {
@@ -99,22 +91,6 @@ const structuredData = {
   ],
 };
 
-const menuItems = [
-  { label: 'Home', ariaLabel: 'Go to home page', link: '#home' },
-  { label: 'About', ariaLabel: 'Learn about us', link: '#about' },
-  { label: 'Experience', ariaLabel: 'View our experience', link: '#experience' },
-  { label: 'Projects', ariaLabel: 'View our projects', link: '#projects' },
-  { label: 'Skills', ariaLabel: 'View our skills', link: '#skills' },
-  { label: 'Process', ariaLabel: 'View our process', link: '#process' },
-  { label: 'Testimonials', ariaLabel: 'View our testimonials', link: '#testimonials' },
-  { label: 'Contact', ariaLabel: 'Get in touch', link: '#contact' }
-];
-
-const socialItems = [
-  { label: 'GitHub', link: 'https://github.com/atikmahbub' },
-  { label: 'LinkedIn', link: 'https://linkedin.com/in/atik-mahbub' }
-];
-
 export default function RootLayout({
   children,
 }: {
@@ -126,22 +102,19 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@1,2&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
-        {/* Google Search Console verification for Netlify site */}
         <meta
           name="google-site-verification"
           content="yuqjN30EZzmBHNsf2nKefO8rATnz2pR6Uo3x734rCsw"
         />
-        {/* you can add other head meta tags here if needed */}
       </head>
 
-      <body
-        className={`font-sans ${inconsolata.variable} min-h-screen antialiased transition-colors duration-500`}
-      >
-        <ThemeScript />
+      <body className="min-h-screen antialiased">
         {isGaEnabled && (
           <>
             <Script
@@ -171,15 +144,10 @@ export default function RootLayout({
           {JSON.stringify(structuredData)}
         </Script>
         <Providers>
-          <StaggeredMenu
-            isFixed
-            items={menuItems}
-            socialItems={socialItems}
-            colors={['#7C3AED', '#6366F1', '#06B6D4']}
-            accentColor="#6366F1"
-            displayItemNumbering={false}
-          />
-          <div className="relative z-0 pt-20 sm:pt-24 overflow-x-hidden">{children}</div>
+          <Navbar />
+          <div className="overflow-x-hidden">{children}</div>
+          <ScrollReveal />
+          <BackToTop />
         </Providers>
       </body>
     </html>

@@ -1,200 +1,166 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import clsx from "clsx";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const navItems = [
-  { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
+  { label: "Work", href: "#work" },
   { label: "Skills", href: "#skills" },
   { label: "Process", href: "#process" },
-  { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("#home");
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("");
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-      if (window.scrollY < 120) {
-        setActiveSection("#home");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    if (!isOpen) return;
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsOpen(false);
-    };
-    window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
-  }, [isOpen]);
-
-  useEffect(() => {
-    const sections = navItems
-      .map((item) => document.querySelector<HTMLElement>(item.href))
-      .filter((section): section is HTMLElement => Boolean(section));
-
+    const ids = navItems.map((i) => i.href.slice(1));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
     if (!sections.length) return;
 
-    const observer = new IntersectionObserver(
+    let current = "";
+    const spy = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible[0]?.target.id) {
-          setActiveSection(`#${visible[0].target.id}`);
-        }
+        entries.forEach((e) => {
+          if (e.isIntersecting) current = "#" + e.target.id;
+        });
+        setActive(current);
       },
-      { threshold: 0.4 }
+      { rootMargin: "-45% 0px -50% 0px" }
     );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    sections.forEach((s) => spy.observe(s));
+    return () => spy.disconnect();
   }, []);
 
-  const handleNavClick = () => {
-    setIsOpen(false);
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 940) setMobileOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleClick = (href: string) => {
+    setMobileOpen(false);
+    if (href === "#home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const el = document.querySelector(href);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - 60;
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   return (
-    <header
-      className={clsx(
-        "pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-0 pb-2 transition-colors",
-        isOpen
-          ? "bg-white dark:bg-[#19104F]"
-          : "bg-white/80 dark:bg-[#19104F]/80",
-        "shadow-[0_20px_60px_-35px_rgba(15,23,42,0.55)] xl:bg-transparent xl:shadow-none"
-      )}
-      role="navigation"
-    >
-      <div
-        className={clsx(
-          "pointer-events-auto flex w-full max-w-7xl justify-between",
-          isOpen && "hidden xl:flex" // hide on mobile when menu open, keep flex on xl
-        )}
-      >
-        {" "}
-        <nav
-          className={clsx(
-            "flex w-full items-center justify-between gap-4 rounded-[1.75rem] border border-white/60 bg-white/20 px-6 py-3 text-sm text-slate-700 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6),0_20px_50px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 backdrop-blur-md md:backdrop-blur-[35px] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_20px_50px_-10px_rgba(0,0,0,0.4)] dark:text-white/90",
-            isScrolled ? "scale-[1.01]" : "",
-            isOpen
-              ? "opacity-0 pointer-events-none xl:opacity-100 xl:pointer-events-auto"
-              : "opacity-100 pointer-events-auto"
-          )}
-          aria-label="Primary"
+    <header className={`nav${scrolled ? " scrolled" : ""}`} id="nav">
+      <div className="wrap nav-inner">
+        <a
+          href="#home"
+          className="brand"
+          onClick={(e) => { e.preventDefault(); handleClick("#home"); }}
         >
-          <div className="flex flex-shrink-0 items-center gap-2 whitespace-nowrap text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-white/60">
-            <span className="inline-flex h-2 w-2 rounded-full bg-[#7DD3FC] dark:bg-[#7DD3FC] text-center" />
-            Atik Mahbub
-          </div>
+          <span className="dot" />
+          Atik&nbsp;Mahbub
+          <span className="sub">/ Full-Stack Engineer</span>
+        </a>
 
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white/70 text-slate-600 hover:border-slate-400 hover:text-slate-900 dark:border-white/15 dark:bg-white/5 dark:text-white hover:dark:border-white/35 hover:dark:text-white xl:hidden"
-            onClick={() => setIsOpen((prev) => !prev)}
-            aria-expanded={isOpen}
-            aria-controls="primary-navigation"
-          >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-
-          <div className="hidden items-center gap-3 xl:flex">
-            <ul
-              id="primary-navigation"
-              className={clsx(
-                "flex gap-1 text-[0.8rem] font-semibold uppercase tracking-[0.25em] text-slate-500 dark:text-white/60",
-                isOpen && "flex"
-              )}
+        <nav className="nav-links" aria-label="Primary">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={active === item.href ? "active" : ""}
+              onClick={(e) => { e.preventDefault(); handleClick(item.href); }}
             >
-              {navItems.map((item) => {
-                const isActive = activeSection === item.href;
-                return (
-                  <li key={item.href}>
-                    <a
-                      href={item.href}
-                      onClick={handleNavClick}
-                      className={clsx(
-                        "rounded-full px-4 py-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:focus-visible:ring-white/60",
-                        isActive
-                          ? "bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-800 text-white shadow-[0_12px_30px_-20px_rgba(15,23,42,0.6)] dark:bg-slate-200/30 dark:text-white dark:from-transparent dark:via-transparent dark:to-transparent"
-                          : "border border-transparent text-slate-600 hover:border-slate-400 hover:text-slate-900 dark:text-white/60 dark:hover:border-white/30 dark:hover:text-white"
-                      )}
-                      aria-current={isActive ? "page" : undefined}
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-            <ThemeToggle />
-          </div>
+              {item.label}
+            </a>
+          ))}
         </nav>
+
+        <div className="nav-cta">
+          <a
+            href="https://github.com/atikmahbub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn ghost"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://calendly.com/atikmahbub100/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn"
+          >
+            Book a Call <span className="arrow">↗</span>
+          </a>
+        </div>
+
+        <button
+          className={`nav-burger${mobileOpen ? " open" : ""}`}
+          id="navBurger"
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen((v) => !v)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </div>
 
-      {isOpen ? (
-        <div className="pointer-events-auto mt-0 flex w-full justify-center rounded-[1.75rem] border border-white/60 bg-white/20 px-4 py-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_30px_80px_-45px_rgba(15,23,42,0.55)] backdrop-blur-md md:backdrop-blur-[35px] dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_20px_50px_-10px_rgba(0,0,0,0.4)] xl:hidden">
-          <div className="flex w-full flex-col gap-4">
-            <div className="flex items-center justify-between rounded-full border border-slate-200/80 bg-white/80 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-white/60">
-              <span className="inline-flex items-center gap-2 whitespace-nowrap">
-                <span className="inline-flex h-2 w-2 rounded-full bg-[#7DD3FC]" />
-                Atik Mahbub
-              </span>
-              <button
-                type="button"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white/70 text-slate-600 hover:border-slate-400 hover:text-slate-900 dark:border-white/15 dark:bg-white/5 dark:text-white hover:dark:border-white/35 hover:dark:text-white"
-                onClick={() => setIsOpen(false)}
-                aria-label="Close navigation"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            <div className="rounded-[2.5rem] border border-slate-200/80 bg-white/80 p-4 text-xs uppercase tracking-[0.3em] text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-white/60">
-              <div className="mb-3 flex justify-between rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 text-slate-600 dark:border-white/15 dark:bg-white/5 dark:text-white/70">
-                <span>Theme</span>
-                <ThemeToggle variant="pill" />
-              </div>
-              <ul className="flex flex-col gap-2">
-                {navItems.map((item) => {
-                  const isActive = activeSection === item.href;
-                  return (
-                    <li key={item.href}>
-                      <a
-                        href={item.href}
-                        onClick={handleNavClick}
-                        className={clsx(
-                          "block w-full rounded-2xl px-4 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:focus-visible:ring-white/50",
-                          isActive
-                            ? "bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-800 text-white dark:bg-slate-100/10 dark:text-white dark:from-transparent dark:via-transparent dark:to-transparent"
-                            : "hover:bg-white/60 hover:text-slate-900 dark:hover:bg-white/5 dark:hover:text-white"
-                        )}
-                        aria-current={isActive ? "page" : undefined}
-                      >
-                        {item.label}
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
+      <div className={`mobile-menu${mobileOpen ? " open" : ""}`} id="mobileMenu">
+        {navItems.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            className="mlink"
+            onClick={(e) => { e.preventDefault(); handleClick(item.href); }}
+          >
+            {item.label}
+          </a>
+        ))}
+        <div className="mcta">
+          <a
+            href="https://github.com/atikmahbub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn ghost"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://calendly.com/atikmahbub100/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn"
+          >
+            Book a Call <span className="arrow">↗</span>
+          </a>
         </div>
-      ) : null}
+      </div>
     </header>
   );
 }
