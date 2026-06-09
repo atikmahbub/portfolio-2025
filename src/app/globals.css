@@ -487,6 +487,8 @@ h1, h2, h3, h4 { margin: 0; font-weight: 600; font-family: var(--serif); }
 @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
 .contact-lead { color: var(--on-violet-2); font-size: clamp(17px, 1.7vw, 20px); max-width: 48ch; line-height: 1.5; }
 .contact-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+.contact .btn.ghost { background: transparent; color: var(--on-violet); border-color: rgba(255,255,255,0.45); }
+.contact .btn.ghost:hover { background: var(--on-violet); color: var(--violet-ink); }
 .contact-info { border-top: 1px solid rgba(255,255,255,0.22); }
 .info-row { display: flex; justify-content: space-between; gap: 16px; padding: 17px 0; border-bottom: 1px solid rgba(255,255,255,0.16); align-items: center; flex-wrap: wrap; }
 .info-row .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-violet-2); }
