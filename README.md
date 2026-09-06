@@ -28,11 +28,26 @@ The site is hosted on **Vercel** at [atikmahbub.com](https://atikmahbub.com). Pu
 
 ### Old Netlify site (redirector)
 
-`atikmahbub.netlify.app` stays deployed purely to preserve link equity. It no longer builds the app:
+`atikmahbub.netlify.app` stays deployed purely to preserve link equity. Every path
+returns a **301** to the same path on the new domain.
 
-- `netlify.toml` publishes the static [`netlify-redirect/`](netlify-redirect/) shell and declares a wildcard **301** (permanent) redirect: `/*` → `https://atikmahbub.com/:splat`, with `force = true` so it wins over anything else that could be served.
-- [`netlify-redirect/_redirects`](netlify-redirect/_redirects) carries the same rule (`301!`) as a fallback.
-- A `/google*` rule sits above the wildcard so a Search Console HTML verification file keeps being served — the old property can't use DNS verification, and losing ownership there would block the Change of Address tool.
+`@netlify/plugin-nextjs` is installed on that site **through the Netlify UI**
+(`origin: ui` in the build log), so it runs regardless of what `netlify.toml`
+says, and it fails the build if the publish directory has no Next.js output.
+`netlify.toml` therefore still builds the app and publishes `.next` — nothing of
+it is ever served, because the wildcard redirect is `force = true`.
+
+- `/google*` is rewritten (200) ahead of the wildcard so a Search Console HTML
+  verification file in `public/` stays reachable. The old property cannot use DNS
+  verification, and losing ownership there would block the Change of Address tool.
+- [`netlify-redirect/`](netlify-redirect/) is a standalone shell (`_redirects` +
+  `index.html`) that can be drag-and-dropped onto Netlify for an instant deploy
+  with no build.
+
+**Cleaner end state:** remove the Next.js plugin in *Project configuration →
+Build & deploy → Build plugins*, then switch `netlify.toml` to
+`publish = "netlify-redirect"` with a no-op build command. That skips a pointless
+Next.js build on every deploy.
 
 Verify after deploying:
 
