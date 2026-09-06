@@ -1,2 +1,8 @@
-# Fallback for the redirect rule in netlify.toml (same 301, same splat).
+# Standalone redirect rules — this folder can be deployed to Netlify on its own
+# (drag-and-drop), no build step required. Rules are matched top-down.
+
+# Keep Search Console's HTML verification file reachable (see netlify.toml).
+/google*  /google:splat  200
+
+# Permanent 301 to the new domain. The ! forces it over any other match.
 /*  https://atikmahbub.com/:splat  301!
