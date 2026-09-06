@@ -92,15 +92,16 @@ export default function ProjectsSection() {
         {/* Featured */}
         <div className="featured reveal">
           <div className="f-l">
-            <div className="f-num">★ Featured / 1Shot Prompt Builder</div>
-            <h3>1Shot Prompt Builder</h3>
+            <div className="f-num">★ Featured / 1Shot API</div>
+            <h3>1Shot API</h3>
             <p>
               Orchestrating fragmented smart contracts manually wasted hundreds of
-              developer hours. I led the end-to-end React/Next.js build with recursive
-              ABI parsers that templatize complex EVM workflows.
+              developer hours. I led the end-to-end React/Next.js build — recursive ABI
+              parsers, wallet connection and chain transaction flows that templatize
+              complex EVM workflows.
             </p>
             <div className="chips">
-              {["React", "Next.js", "Solidity", "Ethers.js", "tRPC", "TypeScript", "OpenAI"].map(
+              {["React", "Next.js", "TypeScript", "Ethers.js", "tRPC", "EVM"].map(
                 (c) => (
                   <span className="chip" key={c}>
                     {c}
