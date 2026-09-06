@@ -1,0 +1,2 @@
+# Fallback for the redirect rule in netlify.toml (same 301, same splat).
+/*  https://atikmahbub.com/:splat  301!

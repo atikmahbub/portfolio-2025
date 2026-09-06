@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/constants/constants";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://atikmahbub.netlify.app";
-
   return {
     rules: [
       {
@@ -10,6 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

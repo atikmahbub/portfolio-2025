@@ -43,6 +43,28 @@ const projects = [
     linkLabel: "View prototype",
     href: "https://istanbulmedic.com/",
   },
+  {
+    num: "05",
+    tag: "AI Coaching",
+    status: "live" as const,
+    statusLabel: "Live",
+    title: "Thinkly",
+    desc: "An AI coaching platform for engineers — structured, conversational guidance that turns career goals into a concrete practice loop.",
+    chips: ["Next.js", "TypeScript", "Node.js", "OpenAI SDK", "Postgres"],
+    linkLabel: "Try Thinkly",
+    href: "https://thinkly-v1.vercel.app/",
+  },
+  {
+    num: "06",
+    tag: "AI EdTech",
+    status: "live" as const,
+    statusLabel: "Live",
+    title: "TutorPulse",
+    desc: "AI-powered SSC Science exam prep that generates adaptive practice sets and explains every answer in the student's own language.",
+    chips: ["Next.js", "TypeScript", "Node.js", "Prisma", "OpenAI SDK"],
+    linkLabel: "View project",
+    href: "#contact",
+  },
 ];
 
 export default function ProjectsSection() {

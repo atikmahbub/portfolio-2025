@@ -1,10 +1,35 @@
+# ---------------------------------------------------------------------------
+# This Netlify site (atikmahbub.netlify.app) is now a REDIRECTOR ONLY.
+# Hosting moved to Vercel; the canonical origin is https://atikmahbub.com.
+# Keep this site deployed so existing links and indexed URLs keep resolving.
+# ---------------------------------------------------------------------------
+
 [build]
-  command = "npm run build"
-  publish = ".next"
+  # No app to build — publish the static redirect shell.
+  command = "echo 'Redirector only — see netlify.toml'"
+  publish = "netlify-redirect"
 
 [build.environment]
   NODE_VERSION = "20"
   NEXT_TELEMETRY_DISABLED = "1"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+# --- Search Console carve-out (must come BEFORE the wildcard) ---------------
+# Rules are evaluated top-down, first match wins, so this beats the /* rule.
+# The old atikmahbub.netlify.app property can only be verified by HTML file /
+# meta tag (its DNS belongs to Netlify), and the wildcard below would redirect
+# the verification file away — which eventually un-verifies the property and
+# blocks the Change of Address tool. Drop Google's googleXXXX.html file into
+# netlify-redirect/ and it will keep being served.
+[[redirects]]
+  from = "/google*"
+  to = "/google:splat"
+  status = 200
+
+# Permanent (301) wildcard redirect. :splat carries the rest of the path
+# through, so /work?src=x -> https://atikmahbub.com/work?src=x.
+# force = true makes this win over any file that would otherwise be served.
+[[redirects]]
+  from = "/*"
+  to = "https://atikmahbub.com/:splat"
+  status = 301
+  force = true

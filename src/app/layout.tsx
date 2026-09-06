@@ -7,51 +7,70 @@ import Providers from "@/components/Providers";
 import Analytics from "@/components/Analytics";
 import ScrollReveal from "@/components/ScrollReveal";
 import BackToTop from "@/components/BackToTop";
-import { GA_MEASUREMENT_ID } from "@/constants/constants";
+import { GA_MEASUREMENT_ID, SITE_NAME, SITE_URL } from "@/constants/constants";
+
+const title = "Atik Mahbub — Full-Stack Engineer";
+const description =
+  "Portfolio of Atik Mahbub, a full-stack engineer building scalable web and mobile products, AI/LLM-driven experiences, and Web3-integrated platforms.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://atikmahbub.netlify.app"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Atik Mahbub — Full-Stack Engineer",
+    default: title,
     template: "%s | Atik Mahbub",
   },
-  description:
-    "Portfolio of Atik Mahbub, a full-stack engineer building scalable products, AI-driven experiences, and Web3-integrated platforms.",
+  description,
   keywords: [
     "Atik Mahbub",
     "Full-Stack Engineer",
     "React",
     "Next.js",
     "TypeScript",
-    "AI",
+    "Node.js",
+    "React Native",
+    "AI Integration",
+    "LLM",
+    "RAG",
+    "OpenAI",
     "Web3",
     "Software Engineer",
     "Portfolio",
     "Product Engineering",
   ],
-  authors: [{ name: "Atik Mahbub" }],
+  authors: [{ name: "Atik Mahbub", url: SITE_URL }],
   creator: "Atik Mahbub",
+  publisher: "Atik Mahbub",
   alternates: {
-    canonical: "https://atikmahbub.netlify.app",
+    canonical: "/",
   },
   openGraph: {
-    title: "Atik Mahbub — Full-Stack Engineer",
+    title,
     description:
       "Building scalable products, AI agent experiences, and Web3-integrated platforms with a curious, craft-driven mindset.",
-    url: "https://atikmahbub.netlify.app",
-    siteName: "Atik Mahbub Portfolio",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
+    // og:image comes from app/opengraph-image.tsx (1200x630).
   },
   twitter: {
     card: "summary_large_image",
-    title: "Atik Mahbub — Full-Stack Engineer",
+    title,
     description:
       "Full-stack engineer delivering thoughtful product experiences across AI, Web3, and modern web stacks.",
     creator: "@atikmahbub",
+    // twitter:image comes from app/twitter-image.tsx (1200x630).
   },
-  icons: {
-    icon: "/favicon.ico",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
@@ -67,10 +86,10 @@ const structuredData = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://atikmahbub.netlify.app/#person",
+      "@id": `${SITE_URL}/#person`,
       name: "Atik Mahbub",
       jobTitle: "Full-Stack Engineer",
-      url: "https://atikmahbub.netlify.app",
+      url: SITE_URL,
       sameAs: [
         "https://github.com/atikmahbub",
         "https://www.linkedin.com/in/atik-mahbub/",
@@ -82,10 +101,10 @@ const structuredData = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://atikmahbub.netlify.app/#website",
-      url: "https://atikmahbub.netlify.app",
-      name: "Atik Mahbub Portfolio",
-      publisher: { "@id": "https://atikmahbub.netlify.app/#person" },
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      publisher: { "@id": `${SITE_URL}/#person` },
       inLanguage: "en-US",
     },
   ],
@@ -107,10 +126,6 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"
-        />
-        <meta
-          name="google-site-verification"
-          content="yuqjN30EZzmBHNsf2nKefO8rATnz2pR6Uo3x734rCsw"
         />
       </head>
 

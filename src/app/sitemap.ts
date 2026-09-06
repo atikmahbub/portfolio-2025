@@ -1,11 +1,10 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/constants/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://atikmahbub.netlify.app";
-
   return [
     {
-      url: baseUrl,
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
